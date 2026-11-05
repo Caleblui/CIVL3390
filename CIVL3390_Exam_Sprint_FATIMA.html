@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>CIVL3390 Exam Sprint (Group 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: structural drafting sheet. Sticky tab bar, one reading column, diagrams drawn like the lecturer's sketches. */
+:root{
+  --bg:#EFEFEC; --surface:#FFFFFF; --ink:#1B1D1F; --muted:#5E6468; --line:#CFD2CF; --soft:#E6E7E3;
+  --accent:#B4501A; --accent-ink:#FFFFFF; --crit:#C42B2B; --ok:#23803A; --warn:#A86A00; --tint:#F6E7DD; --oktint:#E3F2E6; --crittint:#F9E3E3;
+  --steel:#2F6690; --steeltint:#E1ECF4;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121416; --surface:#1B1E21; --ink:#E7E8E6; --muted:#A0A6A9; --line:#33383C; --soft:#25292C;
+  --accent:#F0915A; --accent-ink:#1A0C04; --crit:#FF6E6E; --ok:#5CCB76; --warn:#E3B04B; --tint:#33241A; --oktint:#15291B; --crittint:#2E1818;
+  --steel:#7FB4DE; --steeltint:#18262F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121416; --surface:#1B1E21; --ink:#E7E8E6; --muted:#A0A6A9; --line:#33383C; --soft:#25292C;
+  --accent:#F0915A; --accent-ink:#1A0C04; --crit:#FF6E6E; --ok:#5CCB76; --warn:#E3B04B; --tint:#33241A; --oktint:#15291B; --crittint:#2E1818;
+  --steel:#7FB4DE; --steeltint:#18262F; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.wrap{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{background:var(--surface);border-bottom:1px solid var(--line);
+  background-image:linear-gradient(var(--soft) 1px,transparent 1px),linear-gradient(90deg,var(--soft) 1px,transparent 1px);background-size:22px 22px}
+header.top .wrap{padding-block:28px 22px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;line-height:1.1;margin:0}
+h1{font-size:clamp(34px,7vw,52px);font-weight:700;letter-spacing:.01em}
+h2{font-size:30px;font-weight:700;margin-top:8px}
+h3{font-size:22px;font-weight:600;margin-top:4px}
+h4{font-size:18px;font-weight:600;margin-top:6px;color:var(--accent)}
+p{margin:0}
+.lede{max-width:64ch;color:var(--muted);margin-top:10px}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:0;scrollbar-width:none}
+nav.tabs button{font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:.02em;background:none;border:0;color:var(--muted);
+  padding:12px 12px 10px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+nav.tabs button:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main .wrap{padding-block:28px 64px;display:flex;flex-direction:column;gap:28px}
+section.view{display:flex;flex-direction:column;gap:28px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.marks{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.marks td,.marks th{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.marks th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.marks td.n{text-align:right;font-family:var(--mono);font-weight:600}
+.bar{height:8px;background:var(--soft);border-radius:4px;overflow:hidden;min-width:60px}
+.bar i{display:block;height:100%;background:var(--accent)}
+.scroll{overflow-x:auto;max-width:100%}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--muted);vertical-align:middle}
+.pill.hot{background:var(--tint);color:var(--accent)}
+.pill.crit{background:var(--crittint);color:var(--crit)}
+.pill.ok{background:var(--oktint);color:var(--ok)}
+.pill.st{background:var(--steeltint);color:var(--steel)}
+.day{display:flex;flex-direction:column;gap:10px}
+.day h3{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.day h3 small{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:400}
+.task{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.task input{width:20px;height:20px;margin-top:3px;accent-color:var(--accent)}
+.task .t{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:600}
+.task b{display:block}
+.task .d{color:var(--muted);font-size:15px}
+.task.done b{text-decoration:line-through;color:var(--muted)}
+.progress{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px}
+.progress .bar{flex:1;height:10px}
+.note{border-left:3px solid var(--accent);background:var(--tint);padding:12px 14px;border-radius:0 6px 6px 0}
+.note.crit{border-color:var(--crit);background:var(--crittint)}
+.note.ok{border-color:var(--ok);background:var(--oktint)}
+.note.st{border-color:var(--steel);background:var(--steeltint)}
+.f{font-family:var(--mono);font-size:14px;background:var(--soft);padding:10px 12px;border-radius:4px;overflow-x:auto;white-space:pre-wrap;line-height:1.7}
+code{font-family:var(--mono);font-size:.9em;background:var(--soft);padding:1px 5px;border-radius:3px}
+ul,ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+details.mod{background:var(--surface);border:1px solid var(--line);border-radius:6px}
+details.mod>summary{list-style:none;cursor:pointer;padding:16px 20px;display:flex;gap:14px;align-items:center;justify-content:space-between}
+details.mod>summary::-webkit-details-marker{display:none}
+details.mod>summary .ttl{display:flex;flex-direction:column;gap:2px;min-width:0}
+details.mod>summary .ttl span{color:var(--muted);font-size:14px}
+details.mod>summary::after{content:"+";font-family:var(--mono);font-size:22px;color:var(--accent)}
+details.mod[open]>summary::after{content:"−"}
+details.mod .body{padding:0 20px 22px;display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line);padding-top:18px}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;padding-left:34px;position:relative}
+.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--surface);font-family:var(--mono);font-size:12px;display:grid;place-items:center}
+table.t{border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:14.5px;width:100%}
+table.t th,table.t td{border:1px solid var(--line);padding:6px 9px;text-align:center;vertical-align:top}
+table.t th{background:var(--soft);font-weight:600}
+table.t td.l,table.t th.l{text-align:left}
+.sk{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:8px}
+.sk svg{width:100%;height:auto;display:block}
+.sk svg text{font-family:var(--mono);fill:var(--ink)}
+.cap{font-size:13px;color:var(--muted)}
+.qbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.qbar select,.qbar button,.btn{font-family:var(--body);font-size:15px;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.score{font-family:var(--mono);font-size:14px;margin-left:auto}
+.q{display:flex;flex-direction:column;gap:10px}
+.q .qh{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.q .qn{font-family:var(--mono);font-weight:600;font-size:13px;color:var(--muted)}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;font-family:var(--body);font-size:15.5px;line-height:1.45;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);cursor:pointer;display:grid;grid-template-columns:24px 1fr;gap:8px}
+.opt:hover{border-color:var(--muted)}
+.opt .k{font-family:var(--mono);font-weight:600;color:var(--muted)}
+.opt.right{border-color:var(--ok);background:var(--oktint)}
+.opt.wrong{border-color:var(--crit);background:var(--crittint)}
+.opt[disabled]{cursor:default}
+.why{font-size:15px;padding:10px 12px;border-radius:6px;background:var(--soft)}
+.ans{font-family:var(--mono);font-size:14px;line-height:1.75;background:var(--soft);padding:10px 12px;border-radius:4px;overflow-x:auto;white-space:pre-wrap}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.form label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted);font-family:var(--mono)}
+.form input,.form select{font-family:var(--mono);font-size:15px;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);width:100%}
+.out{font-family:var(--mono);font-size:14px;line-height:1.8;background:var(--soft);padding:12px 14px;border-radius:4px;white-space:pre-wrap;overflow-x:auto}
+.out b{color:var(--accent)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.two{grid-template-columns:1fr}}
+.reveal>summary{cursor:pointer;font-weight:600;color:var(--accent);list-style:none}
+.reveal>summary::-webkit-details-marker{display:none}
+.reveal>summary::before{content:"▸ ";font-family:var(--mono)}
+.reveal[open]>summary::before{content:"▾ "}
+.reveal{display:flex;flex-direction:column;gap:10px}
+footer{color:var(--muted);font-size:13px;text-align:center;padding-block:24px}
+sub{font-size:.75em}
+@media (max-width:520px){ .card{padding:16px} details.mod .body{padding-left:16px;padding-right:16px} details.mod>summary{padding:14px 16px} h2{font-size:26px} }
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{ header.top,nav.tabs,footer,.noprint{display:none!important} body{background:#fff} }
+</style>
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="eyebrow">CIVL3390 · Integrated Structural Design</div>
+  <h1>Exam Sprint: 48 hours, zero to ready</h1>
+  <p class="lede">Built from every briefing slide and hand-written note (Weeks 3–13), the Phase 1–3 design briefs, the exam briefing, the 2023 final, and your Group 2 Phase 1–3 submissions. The exam is 4 questions in 120 minutes. Two are "explain your design" questions about the carpark you designed. The other two are calculations: a reinforced concrete beam's moment and shear capacity, and a steel floor beam without full lateral restraint. This guide is aimed at exactly those four questions.</p>
+</div></header>
+
+<nav class="tabs" aria-label="Sections"><div class="wrap" role="tablist">
+  <button role="tab" data-v="plan">Plan</button>
+  <button role="tab" data-v="learn">Learn</button>
+  <button role="tab" data-v="calc">Q3 &amp; Q4 methods</button>
+  <button role="tab" data-v="sketch">Sketch drills</button>
+  <button role="tab" data-v="papers">2023 paper solved</button>
+  <button role="tab" data-v="mine">Your design</button>
+</div></nav>
+
+<main><div class="wrap">
+
+<!-- ============ PLAN ============ -->
+<section class="view" id="v-plan">
+  <div class="card">
+    <div class="eyebrow">What you are walking into</div>
+    <h2>120 minutes + 10 reading, open book, 4 questions, 100 marks</h2>
+    <p>Write, calculate and sketch in the answer booklet. <b>Open book: any paper you can carry in and out.</b> Bring a UQ-approved calculator (Casio FX82 series). The 2026 exam briefing and the 2023 paper agree on the format:</p>
+    <div class="scroll"><table class="marks">
+      <thead><tr><th>Q</th><th>What it asks</th><th>Marks (2023)</th><th style="width:26%">Weight</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td><b>Design-change scenario.</b> "If X changed in your Phase 2 carpark, how would you handle it?" Text plus annotated sketches, dot points. In 2023: open stairs, lift isolated by movement joints, so how do you get lateral resistance <i>and</i> allow for shrinkage and thermal movement? Then sketch the lift-to-floor movement joint.</td><td class="n">20</td><td><div class="bar"><i style="width:67%"></i></div></td></tr>
+        <tr><td class="n">2</td><td><b>Short answers about what you did</b> in Phases 1–3: the extra column check for flat slabs, why "shear wall", what sets pad footing thickness, pattern loading, second-order effects.</td><td class="n">20</td><td><div class="bar"><i style="width:67%"></i></div></td></tr>
+        <tr><td class="n">3</td><td><b>(a) RC beam section:</b> sketch at 1:20, then φM<sub>u</sub> (positive) and φV<sub>u</sub> to AS 3600:2018. <b>(b) Frame sketch:</b> reactions, deflected shape, BMD, SFD and axial-force diagram.</td><td class="n">30</td><td><div class="bar"><i style="width:100%"></i></div></td></tr>
+        <tr><td class="n">4</td><td><b>Steel floor beams under a one-way slab:</b> loads using AS/NZS 1170.0 cl 4.2.2 factors and 25 kN/m³ concrete. Find max V* for one beam. For a primary beam find M* and pick a Grade 300 section with <i>intermediate</i> lateral restraint only (φM<sub>b</sub>). Then sketch a simple connection.</td><td class="n">30</td><td><div class="bar"><i style="width:100%"></i></div></td></tr>
+      </tbody></table></div>
+    <div class="note"><b>The big insight.</b> 60 of the 100 marks are two calculation routines that never change: <b>(1)</b> rectangular RC section, φM<sub>u</sub> plus φV<sub>u</sub>; <b>(2)</b> load take-down, M*, then φM<sub>b</sub> = φα<sub>m</sub>α<sub>s</sub>M<sub>s</sub> for a steel beam. Drill both until you can do each in 25 minutes. The other 40 marks reward <i>reasoning</i> about the building you designed. You did the assignments, so print your Group 2 reports and bring them (they're allowed) and use the <i>Your design</i> tab to remember your numbers.</div>
+    <div class="note crit"><b>What the briefing tells you to bring.</b> (1) Whatever lets you calculate RC flexural and shear capacity to AS 3600:2018: the C&amp;CAA T38 handbook extracts plus the cheat sheet. (2) AS 1170 load factors and 25 kN/m³ for RC. (3) The WB/WC/UB/UC section property tables. (4) Whatever lets you design a steel beam that isn't fully laterally restrained: AS 4100 cl 5.6 (it's in the cheat sheet). <b>There's no wind or earthquake calculation.</b> The teaching team won't help you prepare.</div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Your 48-hour plan</div>
+    <h2>Tick it off as you go</h2>
+    <p class="cap">Built for "exam in about 48 h from Friday 00:15". Total is about 20 hours of study with two proper sleeps; sleep is worth more marks than an extra hour of reading. If the exam is earlier, cut the Day 2 afternoon re-do and recall blocks first, never the mock. Ticks are saved in this browser.</p>
+    <div class="progress"><span id="pct">0%</span><div class="bar"><i id="pbar" style="width:0%"></i></div><button class="btn" id="resetPlan" type="button">Reset</button></div>
+    <div id="plan" style="display:flex;flex-direction:column;gap:22px"></div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">In the exam room</div>
+    <h3>Spend the 130 minutes like this</h3>
+    <ol>
+      <li><b>Reading time (10 min):</b> read all four questions. For Q4, sketch the plan and work out which beam carries what (slab span direction, tributary widths, which beam sits on which). For Q3, write down d, A<sub>st</sub> and d<sub>v</sub> in your head.</li>
+      <li><b>Budget about 1.2 min per mark:</b> Q3 ≈ 36 min, Q4 ≈ 36 min, Q1 ≈ 24 min, Q2 ≈ 24 min. Do <b>Q3 and Q4 first</b> while you're fresh: they're the most reliable marks.</li>
+      <li><b>Q3(a):</b> sketch first (1:20 with cover, ties, bars and dimensions; that's marks). Then flexure, then shear. Show k<sub>u</sub>, φ, d<sub>v</sub>, k<sub>v</sub>, θ<sub>v</sub>, and check A<sub>sv.min</sub> and V<sub>u.max</sub>.</li>
+      <li><b>Q4:</b> state the load combination, tributary width and point-load position for each maximum. Draw the BMD of the primary beam, mark the segments between restraints, get α<sub>m</sub> for the critical segment, then iterate through sections in the table.</li>
+      <li><b>Q1/Q2:</b> dot points plus a labelled sketch for every part. Name the mechanism, the AS clause and the consequence. "Because…, so…" sentences score.</li>
+      <li><b>If information is missing, say what you're assuming and carry on.</b> The 2023 paper says so explicitly.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ LEARN ============ -->
+<section class="view" id="v-learn" hidden>
+  <div class="card">
+    <div class="eyebrow">Learn</div>
+    <h2>Twelve lessons, in the order the building was designed</h2>
+    <p>The whole course is one building: a 3-level open-deck reinforced concrete carpark at Campbell Rd / Mill Rd, plus a steel portal-frame roof. Lessons 1–8 are the concrete (Phases 1–2). Lessons 9–10 are the steel roof (Phase 3). Lessons 11–12 are the two calculation routines (Q3, Q4); they're also on the <i>Q3 &amp; Q4 methods</i> tab with live calculators. Each lesson ends with <b>"exam lines"</b>: sentences you can put straight into a Q1/Q2 answer.</p>
+    <div class="note"><b>How to read these.</b> Open one, read it, then close the page and explain it out loud in 60 seconds with a sketch. If you can't, read it again. Q1 and Q2 test understanding, not recall of clause numbers.</div>
+  </div>
+
+  <!-- L1 -->
+  <details class="mod"><summary><div class="ttl"><h3>1 · The project and the design process</h3><span>What you designed, in one picture</span></div></summary><div class="body">
+    <div class="sk"><svg viewBox="0 0 760 300" role="img" aria-label="Section through the carpark">
+      <line x1="20" y1="250" x2="740" y2="250" stroke="var(--muted)" stroke-width="2"/>
+      <text x="24" y="270" font-size="11" fill="var(--muted)">ground: slab on ground 150 thk on 50 sand (independent of columns)</text>
+      <rect x="60" y="244" width="640" height="6" fill="var(--soft)" stroke="var(--ink)"/>
+      <g stroke="var(--ink)" stroke-width="2" fill="var(--soft)">
+        <rect x="60" y="180" width="640" height="10"/><rect x="60" y="112" width="640" height="10"/>
+      </g>
+      <g fill="var(--ink)"><rect x="95" y="190" width="8" height="54"/><rect x="275" y="190" width="8" height="54"/><rect x="455" y="190" width="8" height="54"/><rect x="635" y="190" width="8" height="54"/>
+      <rect x="95" y="122" width="8" height="58"/><rect x="275" y="122" width="8" height="58"/><rect x="455" y="122" width="8" height="58"/><rect x="635" y="122" width="8" height="58"/></g>
+      <g fill="var(--ink)"><rect x="85" y="250" width="28" height="12"/><rect x="265" y="250" width="28" height="12"/><rect x="445" y="250" width="28" height="12"/><rect x="625" y="250" width="28" height="12"/></g>
+      <line x1="370" y1="108" x2="370" y2="194" stroke="var(--crit)" stroke-width="2.5" stroke-dasharray="6 4"/>
+      <text x="376" y="100" font-size="11" fill="var(--crit)">MJ</text>
+      <text x="664" y="206" font-size="11">middle</text><text x="664" y="138" font-size="11">top</text>
+      <g stroke="var(--steel)" stroke-width="3" fill="none"><line x1="275" y1="112" x2="275" y2="56"/><line x1="455" y1="112" x2="455" y2="56"/>
+        <polyline points="215,62 275,56 365,48 455,56 515,62"/></g>
+      <text x="330" y="30" font-size="11" fill="var(--steel)">Phase 3: steel portal roof (3° pitch,</text><text x="470" y="44" font-size="11" fill="var(--steel)">fixed bases, overhangs)</text>
+      <text x="110" y="222" font-size="10.5" fill="var(--muted)">2.3 m clear</text><text x="110" y="236" font-size="10.5" fill="var(--muted)">+ 600 structure</text>
+      <text x="110" y="156" font-size="10.5" fill="var(--muted)">Phase 1–2: RC floors</text><text x="110" y="170" font-size="10.5" fill="var(--muted)">(band beam or flat slab)</text>
+    </svg></div>
+    <div class="scroll"><table class="t"><thead><tr><th class="l">Phase</th><th class="l">What you did</th><th class="l">What Q1/Q2 can ask</th></tr></thead><tbody>
+      <tr><td class="l"><b>1</b> concept</td><td class="l">AS 2890.1 traffic layout; lifts and stairs (NCC egress: ≥ 2 exits, 9–60 m apart, ≤ 40 m travel). Column grid (yours: 8.4 m, about 3 bays between columns). Two floor systems sized by span/depth (C&amp;CAA T36). Movement joints and shear walls in concept. AS 3600 cl 6.10 simplified analysis, then cost.</td><td class="l">Why that column grid? Why one system cheaper? Where does the MJ go? Fire (FRL) and durability (cover).</td></tr>
+      <tr><td class="l"><b>2</b> detailed RC</td><td class="l">2D frame analysis (columns fixed vs pinned, pattern loading). Band beam and slab strip; flat slab design strips; punching; edge beam (moment distribution); corbel by strut and tie; column (biaxial, slenderness, vehicle impact); shear wall (EQ to AS 1170.4); pad footing and 2-pile cap.</td><td class="l">Pattern loading, fixed vs pinned, punching, MJ details, shear walls, footing thickness, piles.</td></tr>
+      <tr><td class="l"><b>3</b> steel roof</td><td class="l">Wind (AS/NZS 1170.2 App B free roof). Stramit purlins and bridging. Portal frame by approximate analysis, then SpaceGASS first and second order. Fly braces, haunches, connections, ties, bracing, cost.</td><td class="l">Fixed vs pinned bases, second-order effects, fly braces, purlin laps and bridging, rigid vs pin connections.</td></tr>
+    </tbody></table></div>
+    <div class="note"><b>The design process is sequential AND iterative:</b> traffic layout first (maximise parking spaces), then add access/egress, columns, walls and joints, losing as few spaces as possible each time. Then analyse, size, detail and cost. Structure serves function.</div>
+    <h4>Exam lines</h4>
+    <ul><li>Columns go on bay division lines (AS 2890.1 lets a column intrude 150 mm into a bay within the 1750–600 mm zone), so no spaces are lost.</li>
+    <li>An economical prestressed floor spans about 25 % further than an RC floor of the same depth, so prestressed exemplar carparks can't be copied directly.</li>
+    <li>Both upper floors use the same structural concept: repetitive formwork, columns aligned through all levels, one analysis.</li></ul>
+  </div></details>
+
+  <!-- L2 -->
+  <details class="mod"><summary><div class="ttl"><h3>2 · Loads and load combinations</h3><span>AS/NZS 1170.0 cl 4.2.2, AS 1170.1 Table 3.1 · needed in every Q4</span></div></summary><div class="body">
+    <div class="f">Strength (ULS) combinations, AS/NZS 1170.0 cl 4.2.2 (the brief calls it "AS 1170.1 cl 4.2.2"):
+  (a) 1.35 G                     ← only governs when Q is small
+  (b) 1.2 G + 1.5 Q              ← the normal floor case
+  (c) 1.2 G + 1.5 ψl Q           (long-term)
+  (d) 1.2 G + Wu + ψc Q          (wind, downward)
+  (e) 0.9 G + Wu                 (wind uplift / overturning)
+  (f) G + Eu + ψc Q              (earthquake)
+Serviceability: G + ψs Q (short term), G + ψl Q (long term)
+
+Self weight of reinforced concrete: 25 kN/m³ (used all semester)
+  150 slab → 3.75 kPa   200 → 5.0   250 → 6.25   275 → 6.875 kPa
+Steel: 7850 kg/m³; beam mass in kg/m × 9.81/1000 = kN/m (100 kg/m = 0.981 kN/m)
+1 tonne = 9.81 kN (3.5 t = 34.3 kN)</div>
+    <div class="scroll"><table class="t"><thead><tr><th class="l">Use (AS 1170.1 Table 3.1/3.2)</th><th>Q (kPa)</th><th>Conc. (kN)</th><th>ψs</th><th>ψl</th><th>ψc</th></tr></thead><tbody>
+      <tr><td class="l">Carpark, vehicles ≤ 2500 kg (Phase 2)</td><td>2.5</td><td>13</td><td>0.7</td><td>0.4</td><td>0.4</td></tr>
+      <tr><td class="l">Roof, non-trafficable (Phase 3)</td><td>0.25*</td><td>1.4</td><td>0.7</td><td>0.0</td><td>0.0</td></tr>
+      <tr><td class="l">Superimposed dead load (brief)</td><td colspan="5">1.2 kPa upper floors (lights, services); roof dead 0.25 kPa</td></tr>
+    </tbody></table></div>
+    <p class="cap">*Roof Q = (0.12 + 1.8/A) ≥ 0.25 kPa; the course used 0.25 kPa. The live load reduction factor (AS 1170.1 cl 3.4.2) <b>cannot</b> be used for carparks.</p>
+    <div class="note crit"><b>Q4 trap: moveable point loads.</b> Put them where they hurt most. For maximum <i>shear</i>, put them at the support end of the beam. For maximum <i>moment</i> in a beam supporting other beams, put them at the end of the secondary beam that lands at the primary beam's midspan. State your placement. Factor them by 1.5 like any Q.</div>
+    <h4>Lateral loads (concept only: no calculation in the exam)</h4>
+    <ul><li><b>Robustness</b> (AS/NZS 1170.0 Sec 6): minimum lateral resistance E<sub>d</sub> = 0.015(G + ψ<sub>c</sub>Q) for h ≤ 15 m (0.01 if &gt; 15 m); connections 0.05(G + ψ<sub>c</sub>Q). "If a small thing happens, a big thing doesn't go wrong."</li>
+    <li><b>Earthquake</b> (AS 1170.4): Importance Level 2, P = 1/500, k<sub>p</sub> = 1.0, Z = 0.08 (Brisbane), site class C<sub>e</sub>. k<sub>p</sub>Z ≤ 0.08 and h ≤ 12 m gives <b>EDC I</b>: F<sub>i</sub> = 0.1W<sub>i</sub> at each floor, with W<sub>i</sub> = ΣG + ψ<sub>c</sub>ΣQ. That's why the brief capped the top floor below 15 m.</li>
+    <li><b>Wind</b> was ignored for the open-deck concrete (EQ governs a heavy building). It governed the light steel roof: V<sub>500</sub> = 57 m/s (region B1), V<sub>des</sub> = 44.9 m/s, p = 1.21C<sub>shp</sub> kPa.</li></ul>
+  </div></details>
+
+  <!-- L3 -->
+  <details class="mod"><summary><div class="ttl"><h3>3 · The two floor systems</h3><span>Band beam &amp; slab vs flat slab &amp; drop panel · Phase 1 &amp; 2</span></div></summary><div class="body">
+    <div class="sk"><svg viewBox="0 0 760 210" role="img" aria-label="Band beam and flat slab sections">
+      <text x="20" y="20" font-size="13" font-weight="600">BAND BEAM &amp; SLAB (one-way)</text>
+      <rect x="20" y="40" width="340" height="14" fill="var(--soft)" stroke="var(--ink)" stroke-width="1.5"/>
+      <rect x="140" y="54" width="100" height="18" fill="var(--soft)" stroke="var(--ink)" stroke-width="1.5"/>
+      <rect x="182" y="72" width="16" height="70" fill="var(--ink)"/>
+      <text x="246" y="68" font-size="11">band 1200 × 470</text><text x="24" y="70" font-size="11">slab 270</text>
+      <text x="24" y="170" font-size="11" fill="var(--muted)">+ shear stays in the band (ties)</text>
+      <text x="24" y="186" font-size="11" fill="var(--muted)">+ longer spans, cantilever edges common</text>
+      <text x="24" y="202" font-size="11" fill="var(--muted)">− less flexible for services, needs aligned columns</text>
+      <text x="400" y="20" font-size="13" font-weight="600">FLAT SLAB &amp; DROP PANEL (two-way)</text>
+      <rect x="400" y="40" width="340" height="20" fill="var(--soft)" stroke="var(--ink)" stroke-width="1.5"/>
+      <rect x="520" y="60" width="100" height="14" fill="var(--soft)" stroke="var(--ink)" stroke-width="1.5"/>
+      <rect x="562" y="74" width="16" height="68" fill="var(--ink)"/>
+      <text x="626" y="74" font-size="11">drop 2800 sq,</text><text x="626" y="88" font-size="11">420 total</text><text x="404" y="76" font-size="11">slab 240</text>
+      <path d="M548 60 L530 40 M592 60 L610 40" stroke="var(--crit)" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="470" y="100" font-size="11" fill="var(--crit)">punching cone</text>
+      <text x="404" y="170" font-size="11" fill="var(--muted)">+ flat soffit for services, simple formwork</text>
+      <text x="404" y="186" font-size="11" fill="var(--muted)">− limited spans (~9 m RC), deflection, PUNCHING</text>
+      <text x="404" y="202" font-size="11" fill="var(--muted)">best on a near-square grid; edge beams all round</text>
+    </svg></div>
+    <div class="two">
+      <div><h4>Band beam &amp; slab</h4><ul>
+        <li>Slab: 1 m strip, multi-span, one-way to the bands. Shear reinforcement is almost never needed (check V* ≤ φV<sub>uc</sub>). Crack control often governs the steel (your Phase 2 slab: 270 thick, 8N12/m top at supports, 5N12/m bottom).</li>
+        <li>Band: carries half the slab span each side (design strip = L/2 + L/2). End spans and cantilevers govern. Always has ties: they're shear steel <i>and</i> hold the flexural bars in place.</li>
+        <li>L<sub>ef</sub> = lesser of L (c/c) or L<sub>n</sub> + D (cl 6.2.2). Ductility: k<sub>uo</sub> ≤ 0.36.</li></ul></div>
+      <div><h4>Flat slab &amp; drop panels</h4><ul>
+        <li>Design strip each way (half-way to adjacent columns), split into a column strip and two half middle strips.</li>
+        <li>M<sub>o</sub> = F<sub>d</sub>L<sub>t</sub>L<sub>o</sub>²/8 (cl 6.10.4). Course split: −ve 0.75 column strip / 0.25 middle strip; +ve 0.5 / 0.5.</li>
+        <li>Drop panel extends ≥ L/6 each side of the column centreline, so ≈ L/3 square. Depth ≈ 1.75 × slab. Its job: <b>punching shear</b> plus the extra depth for hogging moment.</li>
+        <li>Punching: cl 9.3.3 (M*<sub>v</sub> = 0, pinned columns) vs cl 9.3.4 (with M*<sub>v</sub>, fixed columns). With moment transfer the capacity drops; your Phase 2 check at the 3rd row of columns (V* 443 kN, M* 625 kNm) passed with the 420 drop.</li></ul></div>
+    </div>
+    <div class="f">Punching (AS 3600 cl 9.3):  φVuo = φ·u·dom·fcv     fcv = 0.17(1 + 2/βh)√f'c ≤ 0.34√f'c
+  u = critical perimeter at dom/2 from the column face;  βh = long/short side of column;  φ = 0.75
+  With moment transfer (cl 9.3.4):  Vu = Vuo / [1 + u·M*v / (8·V*·a·dom)]</div>
+    <div class="note crit"><b>Your Phase 1 cost result needs care.</b> The report totals are band beam $950,201 vs flat slab $795,361 per floor, so on those totals the flat slab looks 16 % cheaper. But the band beam floor was costed over the full 2505 m², while the flat slab floor was 25 bays × 70.56 m² = 1764 m². Per m² of floor system that is <b>band ≈ $294/m² vs flat slab ≈ $319/m²</b>, so the band beam is actually ~8 % cheaper like-for-like. If you're asked "which was cheaper and why", know this. Also, Phase 1 used Q = 5 kPa and SDL 1.5 kPa; Phase 2 used the AS 1170.1 carpark value Q = 2.5 kPa and SDL 1.2 kPa from the brief.</div>
+    <h4>Exam lines</h4>
+    <ul><li>If the long span is ≥ 1.5 × the short span, a band beam and slab is probably better. Flat slabs suit square grids.</li>
+    <li>The simplified method (cl 6.10) needs ≥ 2 spans, adjacent spans within 20 % (ratio ≤ 1.2), Q ≤ 2G, and uniform load. Your Phase 1 grid was a square 8.4 m, so the simplified method was valid then; Phase 2 used frame analysis as the brief required.</li></ul>
+  </div></details>
+
+  <!-- L4 -->
+  <details class="mod"><summary><div class="ttl"><h3>4 · Analysis ideas the exam loves</h3><span>Pattern loading · fixed vs pinned columns · ductility &amp; redistribution · idealised frame</span></div></summary><div class="body">
+    <div class="sk"><svg viewBox="0 0 760 200" role="img" aria-label="Pattern loading">
+      <g font-size="11">
+      <text x="20" y="18" font-weight="600">Alternate spans loaded → max +M in loaded spans</text>
+      <line x1="20" y1="60" x2="360" y2="60" stroke="var(--ink)" stroke-width="2.5"/>
+      <g fill="var(--accent)" opacity=".55"><rect x="20" y="40" width="85" height="14"/><rect x="190" y="40" width="85" height="14"/></g>
+      <g stroke="var(--ink)" fill="none"><path d="M20 60 l-6 10 h12z M105 60 l-6 10 h12z M190 60 l-6 10 h12z M275 60 l-6 10 h12z M360 60 l-6 10 h12z"/></g>
+      <path d="M20 80 Q62 120 105 82 Q147 70 190 82 Q232 120 275 82 Q317 70 360 80" stroke="var(--crit)" fill="none" stroke-width="2"/>
+      <text x="20" y="140" fill="var(--muted)">loaded spans sag, unloaded spans hog up</text>
+      <text x="400" y="18" font-weight="600">Adjacent spans loaded → max −M at shared support</text>
+      <line x1="400" y1="60" x2="740" y2="60" stroke="var(--ink)" stroke-width="2.5"/>
+      <g fill="var(--accent)" opacity=".55"><rect x="485" y="40" width="170" height="14"/></g>
+      <g stroke="var(--ink)" fill="none"><path d="M400 60 l-6 10 h12z M485 60 l-6 10 h12z M570 60 l-6 10 h12z M655 60 l-6 10 h12z M740 60 l-6 10 h12z"/></g>
+      <path d="M400 80 Q442 74 485 80 Q527 112 570 82 Q612 112 655 80 Q697 74 740 80" stroke="var(--crit)" fill="none" stroke-width="2"/>
+      <circle cx="570" cy="60" r="7" fill="none" stroke="var(--crit)" stroke-width="2"/>
+      <text x="400" y="156" fill="var(--muted)">all spans loaded → max column loads / reactions</text>
+      <text x="20" y="180" fill="var(--muted)">AS 3600 cl 2.5.4 (as the Phase 2 brief cites): continuous beams, slabs, frames.</text>
+      </g></svg></div>
+    <h4>Pattern loading (2023 Q2(d), 5 marks)</h4>
+    <ul><li><b>What:</b> live load isn't always everywhere. Arrange Q on <i>alternate</i> spans (max positive midspan moment) and on <i>adjacent</i> spans (max negative moment at the shared support), as well as <i>all</i> spans (max reactions and column loads).</li>
+    <li><b>Applies to:</b> continuous (statically indeterminate) beams, slabs and floor frames under live load. Dead load is always on every span.</li>
+    <li><b>Why it matters:</b> the full-load case <i>under-predicts</i> midspan sagging and some support hogging. It can also produce moment <i>reversal</i>, so reinforcement is needed where full load says none is. The cl 6.10 coefficients (wL²/11, wL²/10…) already include pattern effects, which is why they don't add up to wL²/8.</li></ul>
+    <h4>Columns fixed vs pinned to the floors (Phase 2)</h4>
+    <ul><li>You analysed twice: a 2-storey 2D frame with columns fixed at the floors and pinned at the footing, then a continuous beam on pinned columns.</li>
+    <li>Your Phase 2 work: the band beam was designed from model 2 (pinned columns): hog −664 kNm, sag 419 kNm. For the 600 × 300 column the fixed analysis gave N* 885 kN with M*<sub>x</sub> 152 and M*<sub>y</sub> 65 kNm, versus N* 886 kN and only the minimum-eccentricity moments (27 / 13 kNm) when pinned. Same axial load, very different moments: that's the point of the comparison.</li>
+    <li><b>Why that's allowed:</b> RC is <b>ductile</b>. If a column gets a moment it wasn't designed for, local cracking and yielding "release" it, and the moment redistributes to the floor that <i>was</i> designed for it. "Ductility is truly our best friend." It only works for a <b>braced</b> frame, where walls carry the lateral load. In an unbraced frame (Conifer Knoll centre) the column moments are essential.</li>
+    <li>Footings are pinned because small footing rotations and settlement release the base moment.</li></ul>
+    <h4>Moment redistribution (cl 6.2.7)</h4>
+    <p>In indeterminate structures you can adjust elastic moments, usually by up to ~15 %, provided ductility (k<sub>uo</sub> limits) and static equilibrium are maintained. It's used to shave peak support moments to get a nicer bar layout. The limits exist to control cracking.</p>
+    <h4>Cracked section stiffness (Table 6.2.4)</h4>
+    <p>For the linear elastic analysis, beams use ~0.4I<sub>g</sub> and columns ~0.8I<sub>g</sub>. ULS deflections from the computer aren't serviceability deflections: correct by load-factor ratio and I<sub>ef</sub>/I, then multiply long-term by k<sub>cs</sub>.</p>
+    <h4>Exam lines</h4>
+    <ul><li>"For a braced frame, gravity-induced column moments are small and don't change the floor design. Designing the floor as continuous over pinned columns is safe because ductile RC redistributes any unintended column moment."</li>
+    <li>"Model on centrelines, then reduce moments and shears to the support face."</li></ul>
+  </div></details>
+
+  <!-- L5 -->
+  <details class="mod"><summary><div class="ttl"><h3>5 · Lateral stability and shear walls</h3><span>Braced frame · rule of 10 · shear centre · why "shear" wall</span></div></summary><div class="body">
+    <div class="sk"><svg viewBox="0 0 760 250" role="img" aria-label="Shear wall layout with movement joint">
+      <g font-size="11">
+      <rect x="40" y="30" width="300" height="180" fill="none" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="380" y="30" width="300" height="180" fill="none" stroke="var(--ink)" stroke-width="2"/>
+      <line x1="360" y1="20" x2="360" y2="222" stroke="var(--crit)" stroke-width="2.5" stroke-dasharray="7 4"/>
+      <text x="320" y="238" fill="var(--crit)">movement joint</text>
+      <rect x="44" y="34" width="46" height="30" fill="var(--soft)" stroke="var(--ink)"/><text x="48" y="53">stair</text>
+      <rect x="630" y="176" width="46" height="30" fill="var(--soft)" stroke="var(--ink)"/><text x="634" y="195">lift</text>
+      <rect x="180" y="34" width="70" height="6" fill="var(--accent)"/><text x="176" y="56" fill="var(--accent)">SW (E-W)</text>
+      <rect x="334" y="100" width="6" height="60" fill="var(--accent)"/><text x="250" y="132" fill="var(--accent)">SW (N-S)</text>
+      <rect x="470" y="200" width="70" height="6" fill="var(--accent)"/><rect x="380" y="70" width="6" height="60" fill="var(--accent)"/>
+      <circle cx="190" cy="120" r="5" fill="var(--steel)"/><text x="198" y="124" fill="var(--steel)">CM ≈ SC</text>
+      <circle cx="530" cy="120" r="5" fill="var(--steel)"/>
+      <path d="M190 120 l-40 -40 M190 120 l60 50" stroke="var(--muted)" stroke-dasharray="3 3"/>
+      <text x="700" y="60">Each portion</text><text x="700" y="74">needs ≥ 3</text><text x="700" y="88">non-concurrent</text><text x="700" y="102">walls, both</text><text x="700" y="116">directions,</text><text x="700" y="130">balanced so</text><text x="700" y="144">shear centre</text><text x="700" y="158">≈ centre of</text><text x="700" y="172">mass</text>
+      </g></svg></div>
+    <ul>
+      <li><b>Braced frame:</b> stair, lift and added walls are far stiffer than the columns, so they take all the lateral load (wind, EQ, robustness). The columns are then "gravity only", pinned top and bottom.</li>
+      <li><b>Rule of 10:</b> if K<sub>walls</sub> ≥ 10 × ΣK<sub>columns</sub>, ignore the columns. K ∝ EI/L and E, L are the same, so compare I. One 200 × 5400 wall: I = 200·5400³/12 = 2624 × 10⁹ mm⁴ = <b>486</b> × a 300 × 600 column (strong axis). For 15 columns in half the building, L<sub>wall,min</sub> = 3.65 m, which fits in a parking bay.</li>
+      <li><b>Balance and torsion:</b> lateral load acts at the centre of mass (EQ) or centre of pressure (wind). If the walls' <b>shear centre</b> isn't on that line, the floor twists in plan and the walls take extra torsional shears. Add walls "thoughtfully" so the arrangement is symmetric (bisymmetric: shear centre = centroid).</li>
+      <li><b>Planar walls</b> are stiff in-plane but flexible out-of-plane. They act as shear walls in one direction and as "pin-jointed" (they flex) for floor movement perpendicular to them. That's how they let the floor shrink.</li>
+      <li><b>Low rise:</b> treat walls as equally stiff, distribute by statics. High rise: deformations matter, so calculate the shear centre.</li>
+      <li><b>Wall design (AS 3600 Sec 11):</b> vertical load from tributary floor plus self weight, at minimum eccentricity (cl 11.5.4). In-plane shear: V* ≤ φV<sub>u</sub> = φ(V<sub>uc</sub> + V<sub>us</sub>). Minimum crack-control steel usually governs. Check overturning and tension at one end: a light wall carrying large seismic shear may need a tied strip footing or tension piles. Your SW: 4000 × 200, EQ 470 kN (middle) and 459 kN (top) to the wall.</li>
+    </ul>
+    <div class="note"><b>2023 Q2(b): "Why is the term shear wall used?"</b> Because the wall resists lateral load <i>in its own plane</i>, mainly by in-plane shear. It's a deep vertical cantilever (short height to length), so shear deformation is comparable to bending deformation (δ = PL³/3EI + 6PL/5AG). It's the "web" that carries diaphragm shear from each floor down to the footing, much like shear in a beam web. Squat walls behave like strut and tie. Out-of-plane it's weak and flexible.</div>
+    <h4>Exam lines</h4>
+    <ul><li>"Stiff elements attract load in proportion to stiffness; the walls are 400+ times stiffer than a column, so the columns can be ignored for lateral load."</li>
+    <li>"Floors act as rigid horizontal diaphragms that deliver the lateral load to the walls."</li></ul>
+  </div></details>
+
+  <!-- L6 -->
+  <details class="mod"><summary><div class="ttl"><h3>6 · Movement joints, corbels and strut-and-tie</h3><span>The single most examined concept · 2023 Q1 was entirely this</span></div></summary><div class="body">
+    <p><b>Why joints:</b> concrete floors shrink as they dry (initial drying shrinkage), creep and shorten axially under load, and expand or contract with temperature and moisture <i>forever</i>. A 55–65 m floor tied to stiff walls at both ends can't move, so restraint stresses crack it. A movement joint splits the floor into independent portions (your MJ runs across the middle of the building, aligned on both floors, with a shear wall each side of it).</p>
+    <div class="sk"><svg viewBox="0 0 760 290" role="img" aria-label="Corbel movement joint at a wall">
+      <g font-size="11">
+      <rect x="60" y="30" width="40" height="230" fill="var(--soft)" stroke="var(--ink)" stroke-width="2"/>
+      <text x="40" y="278">200 lift / stair wall</text>
+      <path d="M100 130 h70 v40 h-70" fill="var(--soft)" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="138" y="122" width="28" height="8" fill="var(--warn)"/>
+      <rect x="120" y="90" width="260" height="32" fill="var(--soft)" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="102" y="90" width="16" height="32" fill="none" stroke="var(--crit)" stroke-dasharray="3 2"/>
+      <rect x="96" y="85" width="60" height="5" fill="var(--steel)"/>
+      <path d="M70 136 h90 v6" stroke="var(--accent)" stroke-width="2.5" fill="none"/>
+      <path d="M152 140 L104 166" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 3"/>
+      <g stroke="var(--muted)" stroke-width="1"><path d="M126 87 L420 42"/><path d="M110 106 L420 66"/><path d="M300 106 L420 96"/><path d="M152 126 L420 130"/><path d="M150 140 L420 158"/><path d="M128 154 L420 186"/><path d="M135 170 L420 214"/></g>
+      <text x="426" y="46" fill="var(--steel)">① cover plate for wheels, fixed one side only</text>
+      <text x="426" y="70" fill="var(--crit)">② 20–25 gap: filler + sealant (+ fire blanket)</text>
+      <text x="426" y="100">③ suspended floor slab / band</text>
+      <text x="426" y="134" fill="var(--warn)">④ elastomeric bearing pad: slab slides</text>
+      <text x="426" y="162" fill="var(--accent)">⑤ tension tie: top bars anchored in wall, cog</text>
+      <text x="426" y="190" fill="var(--accent)">⑥ compression strut into the wall</text>
+      <text x="426" y="218">⑦ corbel / nib ≥ 200 × 200</text>
+      <text x="426" y="250" fill="var(--muted)">Cast the corbel BEFORE the floor it supports.</text>
+      <text x="426" y="266" fill="var(--muted)">Transfers vertical shear, NOT moment.</text>
+      </g></svg></div>
+    <div class="two">
+      <div><h4>Joint types</h4><ul>
+        <li><b>Double column:</b> two columns side by side, each floor portion stands alone.</li>
+        <li><b>Column / wall corbel:</b> a nib cast on the column or wall face, with the floor on a bearing pad.</li>
+        <li><b>Half (dowel) joint in a beam:</b> two "corbels" overlapped. Put it near the <b>quarter point</b> of a band span (low moment, moderate shear). Your MJ line runs across the building mid-length.</li>
+        <li><b>Edge beam with corbel</b> along a column line (flat slab option).</li>
+        <li><b>Dowel joint:</b> smooth dowels debonded or sleeved on one side. Transfers shear, allows slip along the dowel.</li>
+        <li><b>Temporary joints / pour (delay) strips:</b> let early shrinkage happen, then infill.</li></ul></div>
+      <div><h4>Strut and tie (AS 3600 Sec 7)</h4><ul>
+        <li>Used in <b>D-regions</b> (disturbed, within about D of a discontinuity) where plane sections don't stay plane: corbels, half joints, pile caps, squat walls.</li>
+        <li>Steps: model lines (truss), solve forces by trig, give struts width, check strut stress (efficiency β<sub>s</sub>, cl 7.2), size the tie A<sub>st</sub> = T*/(φf<sub>sy</sub>) (φ = 0.8), check nodes (cl 7.4), anchor the ties <i>by the node</i>, add bursting and crack-control steel (cl 7.2.4, 8.6).</li>
+        <li>Prismatic struts are rare; bottle-shaped is the norm; fan-shaped spread in footings. Hydrostatic node: faces normal to the forces, equal stress.</li>
+        <li>Corbel at a beam bottom needs <b>suspension reinforcement</b> (ties) to hang the strut force back up into the beam.</li></ul></div>
+    </div>
+    <h4>Where to put joints and walls together (the crux)</h4>
+    <ul><li>Each portion of floor must be <b>laterally stable on its own</b>: walls in both directions, balanced.</li>
+    <li>A floor shrinks towards a <b>"fixed point"</b>, the stiffness centroid of its walls. Put the restraint near the centre of each portion, so shrinkage moves <i>away</i> from it freely. Never put stiff walls in the same direction at both ends of a portion: they'd fight the shrinkage and crack the floor.</li>
+    <li>Where a core sits at a far end, either <b>isolate</b> it (corbel/slip joint: it then carries vertical load only) or make the core walls planar and pinned out of plane.</li>
+    <li>Ground slab on ground: separate joint layout (saw-cut or construction joints, mesh in top, ~30 cover) to control shrinkage cracking. Isolate it from columns with 10 mm joint filler.</li></ul>
+    <h4>Exam lines</h4>
+    <ul><li>"Corbel joints transfer vertical shear through a bearing pad but allow horizontal sliding, so the floor can shrink and expand without restraint cracking."</li>
+    <li>"The corbel must be sized for bars, cover, bend radii and anchorage, with the load point not too close to the edge (shear-friction failure). Start at 200 × 200."</li></ul>
+  </div></details>
+
+  <!-- L7 -->
+  <details class="mod"><summary><div class="ttl"><h3>7 · Columns and walls</h3><span>Minimum eccentricity · biaxial bending · slenderness · vehicle impact · laps</span></div></summary><div class="body">
+    <ul>
+      <li><b>Minimum eccentricity (cl 10.1.2):</b> M* ≥ 0.05D·N*, about each axis. Real loads are never perfectly concentric. With pinned-column analysis this <i>is</i> the design moment.</li>
+      <li><b>Biaxial bending (cl 10.6.4):</b> needed for the <b>flat slab</b> interior column because there are moments from <i>two orthogonal</i> design strips (M*<sub>x</sub> and M*<sub>y</sub>). The band beam frame was only analysed in one direction. <span class="pill hot">2023 Q2(a)</span> The flat-slab-only checks are: biaxial bending of the column, and punching shear of the slab/drop panel around the column with moment transfer.</li>
+      <li><b>Short vs slender (braced):</b> L<sub>e</sub>/r ≤ 25 (r = 0.3D for rectangles) means short, no moment magnifier (δ<sub>b</sub> = 1). Lecturer's example: 2300/(0.3·300) = 25.5 ≈ 25, short.</li>
+      <li><b>Accidental vehicle impact</b> (AS 1170.1 cl 3.8(a)(i)): 30 kN at 0.5 m above floor, a robustness check. Treat the column as pinned top and bottom (worst case). M ≈ 18 kNm, similar in size to the minimum-eccentricity moment. Add it to M*<sub>min</sub> and check with the T38 column charts. Weak axis governs for a 300 × 600.</li>
+      <li><b>Reinforcement:</b> 1 % ≤ A<sub>sc</sub>/A<sub>g</sub> ≤ 4 % (≤ 0.5 % for buried piles). Ties ≥ N10, spacing ≤ min(D<sub>c</sub>, 15d<sub>b</sub>). Yours: 600 × 300 internal, 8-N20 (1 %), N10 ties @ 300; 300 × 300 edge, 4-N20. Short columns (L<sub>e</sub>/r 11–32).</li>
+      <li><b>Laps:</b> compression lap ≥ L<sub>sy.c</sub> (= 0.22f<sub>sy</sub>d<sub>b</sub>/√f'<sub>c</sub> ≥ 0.0435f<sub>sy</sub>d<sub>b</sub>). Starter bars are cogged onto the footing mat, but <b>the cog is not effective in compression</b>, so the straight length above the mat must be ≥ L<sub>sy.c</sub> (this sets footing depth!). Horizontal cog into the top floor.</li>
+    </ul>
+    <h4>Durability and fire (Phase 1E)</h4>
+    <ul><li>Exposure B1 (near-coastal, exterior): min f'<sub>c</sub> 32 MPa, cover 40 mm (Table 4.10.3.2). Footings cast against ground: 60–75.</li>
+    <li>NCC: carpark Class 7a, ≤ 3 storeys, so Type C construction (open-deck, no FRL needed for the roof steel). FRL = structural adequacy / integrity / insulation, e.g. 120/120/120 (minutes). AS 3600 Sec 5 turns that into minimum b, D and axis distance a<sub>s</sub>. For this building, durability cover (Sec 4) governed over fire.</li></ul>
+  </div></details>
+
+  <!-- L8 -->
+  <details class="mod"><summary><div class="ttl"><h3>8 · Footings</h3><span>Pad footing thickness · bored piles to AS 2159 · pile cap by strut and tie</span></div></summary><div class="body">
+    <div class="sk"><svg viewBox="0 0 760 250" role="img" aria-label="Pad footing critical sections">
+      <g font-size="11">
+      <rect x="40" y="120" width="300" height="70" fill="var(--soft)" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="175" y="30" width="30" height="90" fill="var(--soft)" stroke="var(--ink)" stroke-width="2"/>
+      <text x="212" y="44">N* (pinned base, axial only)</text>
+      <path d="M175 120 L148 182 M205 120 L232 182" stroke="var(--crit)" stroke-width="2" stroke-dasharray="4 3"/>
+      <line x1="118" y1="112" x2="118" y2="198" stroke="var(--accent)" stroke-dasharray="5 3"/>
+      <line x1="175" y1="112" x2="175" y2="198" stroke="var(--steel)" stroke-dasharray="2 3"/>
+      <path d="M186 120 v60 h-14" stroke="var(--ink)" fill="none" stroke-width="1.5"/><path d="M194 120 v60 h14" stroke="var(--ink)" fill="none" stroke-width="1.5"/>
+      <line x1="50" y1="181" x2="330" y2="181" stroke="var(--ink)" stroke-width="2" stroke-dasharray="1 5"/>
+      <g stroke="var(--muted)"><path d="M60 200 v-6 M90 200 v-6 M120 200 v-6 M150 200 v-6 M230 200 v-6 M260 200 v-6 M290 200 v-6 M320 200 v-6"/></g>
+      <text x="40" y="216" fill="var(--muted)">uniform q* = N*/B²</text>
+      <text x="40" y="234"><tspan fill="var(--crit)">— punching at dom/2</tspan>   <tspan fill="var(--accent)">— beam shear at do</tspan>   <tspan fill="var(--steel)">— bending at column face</tspan></text>
+      <text x="380" y="110" font-weight="600">d must exceed:</text>
+      <text x="380" y="130">① Lsy.c of column starter bars</text>
+      <text x="398" y="144" fill="var(--muted)">(the cog is not effective in compression)</text>
+      <text x="380" y="164">② punching depth WITHOUT shear steel</text>
+      <text x="380" y="184">③ one-way beam shear, V* ≤ φVuc</text>
+      <text x="380" y="204">④ + cover 60–75 + 2 bar layers;</text>
+      <text x="398" y="218" fill="var(--muted)">flexure, ku ≤ 0.36</text>
+      </g></svg></div>
+    <div class="note"><b>2023 Q2(c): three requirements that set minimum pad footing thickness:</b> (1) punching shear capacity without shear reinforcement (like the drop panel check, deducting q* inside the perimeter); (2) development length L<sub>sy.c</sub> of the column starter bars, straight, above the bottom mat; (3) one-way beam shear without stirrups. Also: cover to ground plus two bar layers, and enough flexural depth (k<sub>u</sub> ≤ 0.36) with stiffness for the uniform pressure assumption.</div>
+    <div class="two">
+      <div><h4>Pad footing steps</h4><ol class="steps">
+        <li>N from the pinned-base analysis. Use <b>unfactored</b> G + Q against the <b>allowable</b> bearing (200 kPa), or factor the allowable up by the average load factor (e.g. 1.32).</li>
+        <li>B² ≥ N<sub>s</sub>/q<sub>a</sub>, round up. Then q* = N*/B².</li>
+        <li>Depth from ①–④. Steel: cantilever moment q*·B·a²/2 at the column face, each way. Check A<sub>st.min</sub> and anchorage (cog at edges).</li>
+        <li>Yours: 1900 × 1900 × 400, N20 @ 200 each way; q<sub>s</sub> 192 kPa ≤ 200; punching V* 738 ≤ φV<sub>uo</sub> 1550 kN; A<sub>st.min</sub> governed flexure.</li></ol></div>
+      <div><h4>Bored piles (AS 2159)</h4><ol class="steps">
+        <li>E<sub>d</sub> = N*/2 per pile (factored). +20 % for negative skin friction from the loose fill (down-drag as it consolidates).</li>
+        <li>R<sub>d,g</sub> = φ<sub>g</sub>(f<sub>b</sub>A<sub>b</sub> + f<sub>m,s</sub>A<sub>s</sub>) ≥ E<sub>d</sub>. φ<sub>g</sub> = 0.5 (ARR ≈ 3, no load testing). Tuff: f<sub>b</sub> = 1500 kPa, f<sub>m,s</sub> = 100 kPa. Ignore shaft friction in the fill.</li>
+        <li>Spacing ≥ 2.5D (group effects). 75 mm out-of-position tolerance, so M* ≥ max(N*e, 0.05DN*).</li>
+        <li>Structural: design as a column with ~0.5 % steel (buried), N25, helix ties. Yours: 2 × Ø600, 4 m socket in tuff + 6 m fill = 10 m; cap 2700 × 900 × 1000, θ ≈ 43°, tie 4-N20. (You spaced at 3D = 1800, more conservative than 2.5D.)</li>
+        <li>Pile cap = deep beam, so strut and tie: struts ~45°, bottom tie bars over the piles, cogged and anchored past the node.</li></ol></div>
+    </div>
+    <p class="cap">Settlement, not soil strength, usually governs allowable bearing (20–25 mm total, ≤ 50 % differential). Footings are dug by excavators, not built to watchmaking precision, so be sensibly conservative.</p>
+  </div></details>
+
+  <!-- L9 -->
+  <details class="mod"><summary><div class="ttl"><h3>9 · Phase 3: the steel portal roof</h3><span>Why our frame is unusual · approximate analysis · first vs second order</span></div></summary><div class="body">
+    <div class="sk"><svg viewBox="0 0 760 300" role="img" aria-label="Portal frame approximate analysis">
+      <g font-size="11">
+      <text x="20" y="18" font-weight="600">Real frame (fixed bases, rigid knees, overhangs)</text>
+      <polyline points="20,60 70,56 200,46 330,56 380,60" fill="none" stroke="var(--steel)" stroke-width="3"/>
+      <line x1="70" y1="56" x2="70" y2="150" stroke="var(--steel)" stroke-width="3"/><line x1="330" y1="56" x2="330" y2="150" stroke="var(--steel)" stroke-width="3"/>
+      <path d="M58 150 h24 M318 150 h24" stroke="var(--ink)" stroke-width="3"/>
+      <g stroke="var(--ink)"><path d="M60 156 l6 -6 M68 156 l6 -6 M76 156 l6 -6 M320 156 l6 -6 M328 156 l6 -6 M336 156 l6 -6"/></g>
+      <path d="M70 70 Q100 140 140 70 Q200 30 260 70 Q300 140 330 70" fill="none" stroke="var(--crit)" stroke-width="1.6" stroke-dasharray="4 3"/>
+      <text x="20" y="186" fill="var(--muted)">Zero-moment points ≈ 0.1–0.2L from each knee</text>
+      <text x="20" y="202" fill="var(--muted)">(0.21L if fixed-ended, 0 if simply supported)</text>
+      <text x="20" y="218" fill="var(--muted)">Fixed base ≈ pinned base at 2h/3</text>
+      <text x="20" y="234" fill="var(--muted)">(carry-over moment 0.5M)</text>
+      <text x="420" y="18" font-weight="600">Approximate model = determinate</text>
+      <line x1="430" y1="60" x2="740" y2="60" stroke="var(--steel)" stroke-width="3"/>
+      <circle cx="490" cy="60" r="5" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><circle cx="680" cy="60" r="5" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>
+      <line x1="465" y1="60" x2="465" y2="122" stroke="var(--steel)" stroke-width="3"/><line x1="705" y1="60" x2="705" y2="122" stroke="var(--steel)" stroke-width="3"/>
+      <path d="M465 122 l-7 12 h14z M705 122 l-7 12 h14z" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+      <text x="472" y="100">2h/3</text>
+      <text x="500" y="46">centre span L−2a, simply supported</text>
+      <text x="420" y="166">M1 (centre) = w(L − 2a)²/8</text>
+      <text x="420" y="184">M2 (knee) = w·a²/2 + (centre reaction)·a</text>
+      <text x="420" y="202">Overhang moment → all into the column</text>
+      <text x="438" y="216" fill="var(--muted)">(column ≈ 10× stiffer: 4EI/L, 25 m vs 3 m)</text>
+      <text x="420" y="236">Rafter from M1 (+10 %); column from M2</text>
+      <text x="420" y="254">Haunch if M2 &gt; M1 (10–15 % of span)</text>
+      </g></svg></div>
+    <ul>
+      <li><b>Normal portals:</b> pinned bases, rigid knee and ridge, cross-bracing in the roof and walls. Sway frame in-plane, braced frame out-of-plane. Pinned bases are usually <i>cheaper</i> (small footings).</li>
+      <li><b>Ours:</b> no walls (natural ventilation) and columns inboard on the concrete columns. Wall bracing would cost parking bays, so the columns have <b>fixed bases</b> and no cross bracing. Out-of-plane each column is a <b>fixed-base cantilever about its weak axis</b> (longitudinal wind), so there's biaxial bending at the base. The concrete floor easily takes the base moment. Yours: 250UC89.5 fixed-base columns (biaxial base check 0.98, tight), 460UB74.6 rafters with a 2.6 m haunch, 250UB37.3 cantilevers (5.85 m), 500 × 500 base plate with 4-M30 8.8.</li>
+      <li><b>Load cases:</b> 1.2G + 1.5Q (UDL); 0.9G + W<sub>u</sub> (uplift: the bottom flange of the rafter goes into compression, so <b>fly braces</b>); 1.2G + W<sub>down</sub>; 1.2G + W<sub>longitudinal</sub>. EQ (light roof, horizontal only) never governs. Yours: 7.75 kN vs wind 22.8 kN transverse, 58.2 kN longitudinal.</li>
+      <li><b>Approximate analysis:</b> turn the indeterminate frame determinate by inserting pins where you expect M = 0 (you must be able to sketch the expected BMD). It gives first member sizes for SpaceGASS and a hand check of the output. Most errors are input errors.</li>
+      <li><b>Haunch:</b> a cut UB welded under the rafter at each knee, 10–15 % of span. It restores capacity where the knee moment exceeds the rafter's. Same both ends because wind can come from either side.</li>
+      <li><b>Deflection often governs portals.</b> Yours: rafter midspan 81 mm vs L/250 = 101 mm (pass), but the <b>cantilever tip 44 mm vs 32.5 mm FAILED</b>. That's an unresolved issue to talk about (knee brace, deeper cantilever).</li>
+    </ul>
+    <div class="note"><b>2023 Q2(e): second-order effects.</b> <i>What:</i> first-order analysis assumes deflections are small and equilibrium is on the undeformed shape. Second-order analysis puts equilibrium on the <b>deformed</b> geometry, so axial load × lateral deflection adds moment: P-Δ (frame sway) and P-δ (member bow). M = P(e + δ) instead of Pe. Iterative: AS 4100 uses moment amplification factors by hand, software uses "non-linear geometry" (not non-linear material: steel stays elastic, E = 200 GPa). <i>Applies to:</i> compression members and sway (unbraced) frames, i.e. the portal columns and rafters. <i>Was it significant?</i> <b>No.</b> Your SpaceGASS second-order moments were +1.9–2.2 % at the eaves and +3.1–3.7 % at the ridge, so δ ≈ 1.02–1.04. Under uplift the columns go into tension and second-order moments actually drop slightly (−0.3 to −0.6 %). The frame is light, short and stiff, with low axial load, so it isn't sway-sensitive. You still designed with the second-order values.</div>
+  </div></details>
+
+  <!-- L10 -->
+  <details class="mod"><summary><div class="ttl"><h3>10 · Wind, purlins, bracing, connections</h3><span>Phase 3 detailing · concept questions</span></div></summary><div class="body">
+    <div class="f">Wind (AS/NZS 1170.2:2021):  Vdes = VR·Mc·Md·(Mz,cat·Ms·Mt)
+  IL2 → V500 = 57 m/s (ULS), V25 = 39 m/s (SLS); Region B1; Md = 0.95; Mz,cat = 0.83 (TC3, h<10 m); Ms = Mt = Mc = 1.0
+  → Vdes,ult = 44.9 m/s, p = 0.5ρV²Cshp = 1.21·Cshp kPa (SLS 0.57·Cshp = 0.47 pult)
+  Free roof (App B.3): Cshp = Cp,n·Ka·Kl;  Cp,w / Cp,l combos e.g. (−0.3, −0.4), (0.4, 0)
+  Ka (area reduction): purlin ≈ 10 m² → 1.0;  frame > 100 m² → 0.8
+  Kl = 3.0 local pressure (purlins only) within 0.5a of upwind corners, a = 0.2 × shorter roof dim
+  Frictional drag Cf = 0.01–0.04 (Table B.3, ribs/corrugations across or along the wind)</div>
+    <ul>
+      <li><b>Purlins</b> (roof, perpendicular to fall) and <b>girts</b> (walls) are cold-formed C/Z sections (G450–550, Z350 zinc). Spacing is set by the sheeting span (Trimdek: 1.1 m end, 1.5 m internal). Span = frame spacing. Pick size and bridging together from the Stramit tables (kN/m at ULS).</li>
+      <li><b>Outward (uplift) capacity governs:</b> the sheeting restrains the top flange only, so under uplift the unrestrained inner flange is in compression and buckles (LTB). <b>Bridging</b> reduces the effective length (max unbraced 20D or 4 m). A ridge tie stops weak-axis sag before sheeting goes on.</li>
+      <li><b>Z laps, C can't:</b> lapping Z's over the rafters (15 % of span) doubles capacity where continuous-beam support moments are about twice midspan, so smaller purlins. End spans govern: shorten them by 20 % (Table 6) or use a thicker Z in the end spans (Table 7, e.g. Z200 24/19). Yours: Z150-19 at 1.5 m, continuous lapped, 2 rows of bridging per 8.4 m bay (outward ratio 30 %, inward 77 %).</li>
+      <li><b>Fly braces:</b> small angles (50 × 50 × 5 EA) from purlin to the rafter's <i>bottom</i> flange. They restrain the compression flange under uplift or near the knees (hogging), cutting the segment length so φM<sub>b</sub> → φM<sub>s</sub>.</li>
+      <li><b>Eaves ties, ridge tie, roof cross-bracing</b> (M24 rods with turnbuckles): small forces, mostly buildability. Together they carry longitudinal drag to the columns.</li>
+      <li><b>Connections:</b> <b>pin joint</b>: shear and axial only, flanges NOT connected (web cleat, flexible end plate, bolts between flanges). <b>Rigid joint</b>: shear, axial AND moment, flanges MUST be connected (bolted end plate with bolts outside the flanges, or flange plates). Moment goes through the flanges, shear through the web, axial in proportion to area.</li>
+      <li><b>Cost:</b> steel $4500/t × 1.1 (fly braces, connections); purlins $/m + 15 % laps, × 1.5 for bolts, transport and install, + GST. Yours: $293,976 total (but note you used your own market rates for coatings, craneage, etc., not the course's $4500/t × 1.1 and purlins × 1.5 method).</li>
+    </ul>
+  </div></details>
+
+  <!-- L11 -->
+  <details class="mod"><summary><div class="ttl"><h3>11 · Q3 routine: RC rectangular section, φM<sub>u</sub> and φV<sub>u</sub> (AS 3600:2018)</h3><span>The 20-mark calculation · full worked version in the 2023 tab</span></div></summary><div class="body">
+    <div class="f">GEOMETRY  cover c (B1, N32 → 40);  d = D − c − d_tie − d_b/2      (one layer)
+          check bar spacing across b inside ties; tie legs across width ≤ min(D, 600) apart
+FLEXURE (rectangular stress block, cl 8.1)
+  α2 = 0.85 − 0.0015f'c ≥ 0.67        γ = 0.97 − 0.0025f'c ≥ 0.67      (N32: α2 = 0.802, γ = 0.890)
+  ku = Ast·fsy / (α2·f'c·γ·b·d)       (check ku ≤ 0.36 for ductility; compression steel ignored)
+  Mu = Ast·fsy·d·(1 − γ·ku/2)         φ = 1.24 − 13kuo/12,  0.65 ≤ φ ≤ 0.85
+  Ast,min = αb(D/d)²(f'ct.f/fsy)·b·d,  αb = 0.20 (rect), f'ct.f = 0.6√f'c
+SHEAR (cl 8.2, simplified method 8.2.4.3)
+  dv = max(0.72D, 0.9d);  bv = b
+  Asv.min = 0.08√f'c·bv·s / fsy.f       (fsy.f = 500 for N bars)
+  if Asv ≥ Asv.min:  kv = 0.15, θv = 36°    else  kv = 200/(1000 + 1.3dv) ≤ 0.10
+  Vuc = kv·bv·dv·√f'c   (√f'c ≤ 8 MPa)
+  Vus = (Asv·fsy.f·dv/s)·cot θv          (cot 36° = 1.376)
+  Vu,max = 0.55·f'c·bv·dv·cot θv/(1 + cot²θv)   (= 0.262 f'c bv dv at 36°)
+  φVu = 0.75·min(Vuc + Vus, Vu,max);  s ≤ min(0.5D, 300) (≤ min(0.75D, 500) if V* ≤ φVu.min)</div>
+    <div class="note crit"><b>Common mark losers:</b> forgetting the tie in d; using total legs wrong (A<sub>sv</sub> = <i>all</i> vertical legs in one tie set); not checking A<sub>sv.min</sub> before choosing k<sub>v</sub>; using φ = 0.8 (that's the old 2009 code); no sketch; no units. Band beams have 4–6 legs (2–3 closed ties side by side) because legs must be ≤ D or 600 apart across the width.</div>
+  </div></details>
+
+  <!-- L12 -->
+  <details class="mod"><summary><div class="ttl"><h3>12 · Q4 routine: steel beam, not fully laterally restrained (AS 4100 cl 5.6)</h3><span>The 15-mark calculation · calculators on the next tab</span></div></summary><div class="body">
+    <ol class="steps">
+      <li><b>Load path:</b> slab spans one way to the beams parallel to each other. Tributary width = beam spacing. Secondary beams deliver point loads (their reactions) to the primary beam. Primary beam self weight is its own UDL.</li>
+      <li><b>Factored loads:</b> 1.2G + 1.5Q (also check 1.35G). G = slab 25t + SDL + beam self weight.</li>
+      <li><b>BMD for the primary beam,</b> with moveable point loads placed to maximise moment. Mark segments between <b>lateral restraints</b> (connections of secondary beams). The critical segment has the largest moment.</li>
+      <li><b>α<sub>m</sub></b> for that segment: α<sub>m</sub> = 1.7M*<sub>m</sub>/√(M*<sub>2</sub>² + M*<sub>3</sub>² + M*<sub>4</sub>²) ≤ 2.5 (quarter, mid, three-quarter points of the segment), or Table 5.6.1 (linear: 1.75 + 1.05β<sub>m</sub> + 0.3β<sub>m</sub>², β<sub>m</sub> = −1 for uniform moment → 1.0).</li>
+      <li><b>l<sub>e</sub> = k<sub>t</sub>k<sub>l</sub>k<sub>r</sub>l:</b> FF, loads applied at the restraint points (via web cleats) → k<sub>t</sub> = k<sub>l</sub> = k<sub>r</sub> = 1.0. If a load acts on the top flange <i>within</i> a segment, k<sub>l</sub> = 1.4.</li>
+      <li><b>Try a section:</b> Z<sub>ex</sub> ≥ M*/(φf<sub>y</sub>α<sub>m</sub>·~0.8). Then M<sub>s</sub> = f<sub>y</sub>Z<sub>ex</sub>, M<sub>o</sub> = √[(π²EI<sub>y</sub>/l<sub>e</sub>²)(GJ + π²EI<sub>w</sub>/l<sub>e</sub>²)], α<sub>s</sub> = 0.6[√((M<sub>s</sub>/M<sub>o</sub>)² + 3) − M<sub>s</sub>/M<sub>o</sub>].</li>
+      <li><b>φM<sub>b</sub> = 0.9α<sub>m</sub>α<sub>s</sub>M<sub>s</sub> ≤ 0.9M<sub>s</sub></b> ≥ M*. Iterate through the table. Re-check with the real self weight, plus shear φV<sub>v</sub> = 0.9 × 0.6f<sub>y</sub>d·t<sub>w</sub>.</li>
+    </ol>
+    <div class="note st"><b>Use f<sub>y</sub> from the "properties for assessing section capacity" table, not 300.</b> Thick flanges are 280 MPa (most WBs, 610UB, 310UC). E = 200 000 MPa, G = 80 000 MPa. Watch units: I<sub>y</sub> in 10⁶ mm⁴, J in 10³ mm⁴, I<sub>w</sub> in 10⁹ mm⁶.</div>
+  </div></details>
+
+  <!-- Quick concept quiz -->
+  <div class="card">
+    <div class="eyebrow">Concept check</div>
+    <h2>Ten quick questions on Q1/Q2 ideas</h2>
+    <div class="qbar"><button class="btn" id="qReset" type="button">Restart</button><span class="score" id="qScore">0 / 0</span></div>
+    <div id="quiz" style="display:flex;flex-direction:column;gap:18px"></div>
+  </div>
+</section>
+
+<!-- ============ CALC ============ -->
+<section class="view" id="v-calc" hidden>
+  <div class="card">
+    <div class="eyebrow">Q3 &amp; Q4 methods</div>
+    <h2>Two routines, two calculators, endless practice</h2>
+    <p>Do the calculation by hand first, then type the same inputs here to check every intermediate number. The calculators follow the exact steps and clauses you'll write in the exam, so if your number differs you can see <i>where</i>. Change the inputs to invent new practice questions: aim for 3 of each.</p>
+  </div>
+
+  <!-- RC calculator -->
+  <div class="card">
+    <div class="eyebrow">Q3(a) · AS 3600:2018</div>
+    <h3>RC rectangular beam: φM<sub>u</sub> (positive) and φV<sub>u</sub></h3>
+    <div class="form" id="rcForm">
+      <label>b (mm)<input id="rc_b" type="number" value="2400"></label>
+      <label>D (mm)<input id="rc_D" type="number" value="500"></label>
+      <label>cover to ties (mm)<input id="rc_c" type="number" value="40"></label>
+      <label>f'c (MPa)<select id="rc_fc"><option>25</option><option selected>32</option><option>40</option><option>50</option></select></label>
+      <label>bottom bar<select id="rc_db"><option value="12">N12</option><option value="16">N16</option><option value="20">N20</option><option value="24">N24</option><option value="28" selected>N28</option><option value="32">N32</option><option value="36">N36</option></select></label>
+      <label>no. of bars<input id="rc_n" type="number" value="11"></label>
+      <label>tie bar<select id="rc_dt"><option value="10">N10</option><option value="12" selected>N12</option><option value="16">N16</option></select></label>
+      <label>tie legs per set<input id="rc_legs" type="number" value="6"></label>
+      <label>tie spacing s (mm)<input id="rc_s" type="number" value="200"></label>
+      <label>M* (kNm, optional)<input id="rc_M" type="number" value=""></label>
+      <label>V* (kN, optional)<input id="rc_V" type="number" value=""></label>
+    </div>
+    <div class="out" id="rcOut"></div>
+    <div class="sk" id="rcSketch"></div>
+    <p class="cap">Assumes one layer of bottom bars, f<sub>sy</sub> = f<sub>sy.f</sub> = 500 MPa (D500N), vertical ties, simplified shear method (cl 8.2.4.3), and max aggregate ≥ 10 mm. Compression steel is ignored (conservative, standard for this course).</p>
+  </div>
+
+  <!-- Steel calculator -->
+  <div class="card">
+    <div class="eyebrow">Q4(b) · AS 4100 cl 5.6</div>
+    <h3>Steel beam segment: φM<sub>b</sub> and section picker</h3>
+    <div class="form">
+      <label>M* in segment (kNm)<input id="st_M" type="number" value="2023"></label>
+      <label>segment length l (mm)<input id="st_l" type="number" value="4500"></label>
+      <label>kt · kl · kr<input id="st_k" type="number" step="0.05" value="1.0"></label>
+      <label>αm<input id="st_am" type="number" step="0.01" value="1.20"></label>
+      <label>family<select id="st_fam"><option value="all">all</option><option value="UB">UB</option><option value="UC">UC</option><option value="WB" >WB</option><option value="WC">WC</option></select></label>
+      <label>section to inspect<select id="st_sec"></select></label>
+    </div>
+    <div class="qbar"><span class="cap">α<sub>m</sub> helper: M* at the segment's ¼, ½ and ¾ points →</span>
+      <input id="am2" type="number" placeholder="M2" style="width:90px" class="btn"><input id="am3" type="number" placeholder="M3" style="width:90px" class="btn"><input id="am4" type="number" placeholder="M4" style="width:90px" class="btn"><button class="btn" id="amGo" type="button">Compute αm</button></div>
+    <div class="out" id="stOut"></div>
+    <div class="scroll"><table class="t" id="stTable"><thead><tr><th class="l">Lightest sections with φM<sub>b</sub> ≥ M*</th><th>kg/m</th><th>f<sub>y</sub></th><th>φM<sub>s</sub></th><th>M<sub>o</sub></th><th>α<sub>s</sub></th><th>φM<sub>b</sub></th><th>φV<sub>v</sub></th></tr></thead><tbody></tbody></table></div>
+    <p class="cap">Section data from the AISC Design Capacity Tables (Grade 300) in your learning resources. φV<sub>v</sub> = 0.9 × 0.6f<sub>yw</sub>·d·t<sub>w</sub>, valid for stocky webs (d<sub>1</sub>/t<sub>w</sub> ≤ 82/√(f<sub>yw</sub>/250)); flagged with * when the web is slender for shear (AS 4100 cl 5.11.5 reduces it).</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Q4 load take-down template</div>
+    <h3>Write this skeleton in the booklet every time</h3>
+    <div class="f">G (slab)   = 25 × t                         kPa
+G (SDL)    = given                          kPa
+beam SW    = (kg/m) × 9.81/1000             kN/m
+Q          = given UDL kPa (+ moveable P = m × 9.81 kN)
+
+Beam X (spacing s, span L):  wG = g·s + SW,  wQ = q·s
+  w* = 1.2wG + 1.5wQ   (check 1.35wG)
+  V*max = w*L/2 + 1.5ΣP (P at the support)        M*max = w*L²/8 + 1.5·P·L/4 (one P at midspan)
+Reactions onto primary beam (unfactored, keep G and Q separate):  RG = wG·L/2,  RQ = wQ·L/2
+  Point load on primary:  P* = 1.2RG + 1.5RQ (+ 1.5P if a moveable load sits at this end)
+Primary beam: draw the loads, find reactions, M at each point load → BMD → segments</div>
+  </div>
+</section>
+
+<!-- ============ SKETCH ============ -->
+<section class="view" id="v-sketch" hidden>
+  <div class="card">
+    <div class="eyebrow">Sketch drills</div>
+    <h2>Frames: reactions, deflected shape, BMD, SFD, AFD</h2>
+    <p>Q3(b) is worth 10 marks for five qualitative sketches. The Week 13 briefing practised exactly this. Use these rules and you can't go far wrong:</p>
+    <div class="two">
+      <ul>
+        <li><b>Supports:</b> fixed = H, V, M; pin = H, V; roller = 1 force. A <b>pin joint</b> inside a frame = zero moment there.</li>
+        <li><b>Free end / pin / roller:</b> M = 0 unless a moment is applied.</li>
+        <li><b>Rigid knee:</b> the moment is continuous round the corner (same value, same tension face: inside or outside). The 90° angle is preserved in the deflected shape.</li>
+        <li><b>UDL on a member:</b> parabolic BMD, linear SFD. <b>Unloaded member:</b> linear BMD, constant SFD.</li>
+      </ul>
+      <ul>
+        <li><b>Draw BMD on the tension face</b> and say so. The deflected shape curves <i>away</i> from the tension face; contraflexure where the BMD crosses zero.</li>
+        <li><b>Max moment where shear = 0.</b></li>
+        <li><b>Axial force in one member = shear in the member it frames into</b> (at a knee).</li>
+        <li><b>A member pinned at both ends with no load on it is a two-force member:</b> the force acts along the line joining its pins, even if the member is bent (an L-shape). That's the trick in 2023 Q3(b).</li>
+        <li>Indeterminate? Stiffer parts attract more load. Fixed base vs pinned: the fixed base carries half the knee moment back (carry-over 0.5).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="eyebrow">Practice, Week 13 style</div>
+    <h3>Predict first, then reveal</h3>
+    <div id="sketchDrills" style="display:flex;flex-direction:column;gap:22px"></div>
+  </div>
+</section>
+
+<!-- ============ PAPERS ============ -->
+<section class="view" id="v-papers" hidden>
+  <div class="card">
+    <div class="eyebrow">2023 final, fully worked</div>
+    <h2>The only past paper, answered the way the markers want</h2>
+    <p>Try each question from a blank page first (time yourself: 1.2 min per mark), then open the answer. No official solutions were released, so these are model answers built from the course notes and checked by calculation. Q1 and Q2 are written in the dot-point and sketch style the exam briefing asks for.</p>
+  </div>
+
+  <details class="mod"><summary><div class="ttl"><h3>Q1 (20) · Open stairs + isolated lift: lateral resistance vs shrinkage</h3><span>Phase 2, flat slab &amp; drop panel option, section between MJ and Campbell Rd</span></div></summary><div class="body">
+    <p class="cap"><b>Scenario:</b> stairs are open (no walls), outside the envelope and separated from each floor by a movement joint. The lift shaft is also separated by MJs at each floor. So <b>none of the cores can give lateral resistance</b> any more.</p>
+    <h4>(a) 15 marks: how to give lateral resistance while allowing shrinkage and thermal movement</h4>
+    <ul>
+      <li><b>The problem:</b> previously stair and lift walls were the main lateral-load elements. Now each floor portion (MJ to Campbell Rd) is a plate on 300 × 600 columns with nothing stiff. Columns pinned top and bottom can't resist lateral load (robustness 0.015(G + ψ<sub>c</sub>Q), EQ F<sub>i</sub> = 0.1W<sub>i</sub>).</li>
+      <li><b>Option A (preferred): add dedicated planar shear walls</b> (200 thick, ~3.65–5.4 m long by the rule of 10) inside the portion: at least two in the E–W direction and two in the N–S direction (or a ≥ 3 wall non-concurrent arrangement), placed in bay ends or dead space so no parking is lost.</li>
+      <li><b>Locate them about the centre of the portion</b> so their shear centre ≈ the floor's centre of mass (no torsion), <b>and</b> so that walls in the same direction are close together near the portion's middle. The "fixed point" of shrinkage is then central, and the floor shortens freely towards it from both ends. Don't put parallel walls at opposite ends of the portion: they'd restrain shrinkage and crack the slab.</li>
+      <li>Each planar wall is stiff in-plane (carries shear parallel to itself) and flexible out-of-plane. Detail it as effectively pin-jointed for perpendicular movement, so the floor can move across it.</li>
+      <li>The floor acts as a rigid diaphragm delivering load to the walls. Walls are cast integral with the floors (dowels and starter bars) and run down to their own footings, designed for overturning (tension piles or a tied strip footing if needed).</li>
+      <li><b>Option B: frame action (unbraced frame)</b> like the centre section of Conifer Knoll: rely on column–slab moment fixity. The columns and slab then carry lateral moments (biaxial column design, more punching shear from M*<sub>v</sub>, second-order sway effects), and you get more steel in the columns. This is viable for low lateral loads but stiffer walls are cleaner.</li>
+      <li><b>Allowing for movement:</b> keep the central MJ; add <b>pour (delay) strips</b> to let initial drying shrinkage happen before closing; give enough crack-control steel (cl 9.5.3.4, "moderate" degree, partially restrained); isolate the lift from each floor with a <b>corbel joint on bearing pads</b> (it carries vertical load only, no lateral); isolate the stairs similarly; keep the slab on ground isolated from columns.</li>
+      <li><b>Lift isolation consequence:</b> the lift shaft must now be self-stable (a free-standing cantilever core from its footing). Its own walls resist its own lateral load.</li>
+    </ul>
+    <div class="sk"><svg viewBox="0 0 760 260" role="img" aria-label="Plan of floor portion with central shear walls">
+      <g font-size="11">
+      <rect x="40" y="30" width="440" height="200" fill="none" stroke="var(--ink)" stroke-width="2"/>
+      <line x1="480" y1="20" x2="480" y2="240" stroke="var(--crit)" stroke-width="2.5" stroke-dasharray="7 4"/><text x="486" y="250" fill="var(--crit)">MJ</text>
+      <text x="44" y="22">CAMPBELL RD edge</text>
+      <rect x="44" y="236" width="60" height="18" fill="none" stroke="var(--muted)" stroke-dasharray="3 3"/><text x="110" y="250" fill="var(--muted)">open stair, outside envelope, MJ</text>
+      <rect x="400" y="34" width="54" height="36" fill="var(--soft)" stroke="var(--ink)"/><text x="404" y="56">lift</text>
+      <path d="M396 34 v36 h62" fill="none" stroke="var(--crit)" stroke-width="2" stroke-dasharray="3 2"/><text x="330" y="88" fill="var(--crit)">corbel joint all round</text>
+      <rect x="215" y="96" width="80" height="7" fill="var(--accent)"/><rect x="215" y="158" width="80" height="7" fill="var(--accent)"/>
+      <rect x="196" y="100" width="7" height="60" fill="var(--accent)"/><rect x="307" y="100" width="7" height="60" fill="var(--accent)"/>
+      <text x="320" y="134" fill="var(--accent)">planar shear walls about</text><text x="320" y="148" fill="var(--accent)">the centre (fixed point)</text>
+      <circle cx="255" cy="130" r="5" fill="var(--steel)"/>
+      <g stroke="var(--ok)" stroke-width="2" fill="var(--ok)"><path d="M180 130 h-90 M330 130 h100 M255 90 v-45 M255 175 v40"/><path d="M90 130 l8 -4 v8z M430 130 l-8 -4 v8z M255 45 l-4 8 h8z M255 215 l-4 -8 h8z"/></g>
+      <text x="60" y="122" fill="var(--ok)">shrinkage moves freely</text><text x="60" y="136" fill="var(--ok)">towards / away from centre</text>
+      <text x="520" y="60">✗ walls at both ends in the</text><text x="520" y="74">same direction → restraint</text><text x="520" y="88">cracking</text>
+      <text x="520" y="120">✓ walls central, balanced</text><text x="520" y="134">(SC ≈ CM), pinned out-of-</text><text x="520" y="148">plane, both directions</text>
+      <text x="520" y="180">+ pour strips, crack control</text><text x="520" y="194">steel, lift self-stable core</text>
+      </g></svg></div>
+    <h4>(b) 5 marks: movement joint between lift shaft and suspended floor</h4>
+    <p>Sketch the corbel detail from Lesson 6: a continuous RC nib (≥ 200 × 200) cast on the lift wall face <b>before</b> the floor; top tie bars anchored into the wall with a cog past the bearing; an elastomeric bearing pad (or slip membrane) under the slab edge; a 20–25 mm gap with compressible filler and sealant (fire-rated if an FRL is needed); a steel cover plate for vehicle wheels, fixed on one side only; slab edge bars returned (U-bars) at the free edge. Label <i>"transfers vertical shear only, allows horizontal movement"</i>.</p>
+  </div></details>
+
+  <details class="mod"><summary><div class="ttl"><h3>Q2 (20) · Five short answers</h3><span>All in Lessons 4–9</span></div></summary><div class="body">
+    <h4>(a) 3 marks: column check for flat slab not needed for band beam</h4>
+    <p><b>Biaxial bending</b> (AS 3600 cl 10.6.4) of the interior column, with M*<sub>x</sub> and M*<sub>y</sub> from the two orthogonal design-strip frame analyses (fixed columns). The band beam was analysed as a frame in one direction only; the slab direction gave no column moment. Related: punching shear around the column with unbalanced moment transfer (cl 9.3.4) governs the drop panel depth. Mention both.</p>
+    <h4>(b) 3 marks: why "shear wall"?</h4>
+    <p>It resists lateral load acting <b>in its own plane</b> primarily by in-plane shear, like the web of a deep vertical cantilever beam. Because it's squat (height ≈ length), shear deformation and shear capacity (V* ≤ φV<sub>uc</sub> + φV<sub>us</sub>) are as important as flexure. It transfers floor-diaphragm shear down to the footings.</p>
+    <h4>(c) 4 marks: three requirements setting minimum pad footing thickness</h4>
+    <ol><li>Punching shear capacity <b>without shear reinforcement</b> at d<sub>om</sub>/2 from the column face (deduct the bearing pressure inside the perimeter).</li>
+    <li>Development length of the column starter bars in compression, L<sub>sy.c</sub> (the cog on the mat isn't effective in compression).</li>
+    <li>One-way (beam) shear across the full width at d<sub>o</sub> from the column face, without stirrups.</li>
+    <li>(Bonus) cover against ground (60–75) plus two layers of bars; flexural depth for ductility (k<sub>u</sub> ≤ 0.36); stiffness for the uniform bearing assumption.</li></ol>
+    <h4>(d) 5 marks: pattern loading</h4>
+    <p><b>What:</b> arranging live load Q on selected spans (alternate spans, adjacent spans, all spans), with dead load everywhere, to find the worst moments and shears. <b>Applies to:</b> continuous beams, slabs and floor frames with live load (the multi-span band beam, slab strip and flat slab design strips in Phase 2). <b>Why it matters:</b> full load on all spans doesn't give the maximum midspan sagging (alternate spans do) or the maximum hogging at a given support (adjacent spans do). It can cause moment reversal, so it decides bar quantities and cut-off points. Sketch both arrangements and the BMD envelope.</p>
+    <h4>(e) 5 marks: second-order effects</h4>
+    <p><b>What:</b> extra moments from axial load acting on the deflected shape: P-Δ (frame sway) and P-δ (member curvature). Equilibrium on the deformed geometry rather than the original. <b>Applies to:</b> compression members and sway frames, i.e. the Phase 3 portal (fixed-base unbraced columns, rafters with axial thrust). Done by SpaceGASS "non-linear geometry" (AS 4100 uses moment amplification by hand). <b>Significant?</b> No. In your SpaceGASS runs second-order moments were only +1.9–3.7 % above first order (δ ≈ 1.02–1.04): a light roof, short stiff columns and low axial loads, so the frame isn't sway-sensitive. Under uplift the columns are in tension and the moments drop slightly.</p>
+  </div></details>
+
+  <details class="mod"><summary><div class="ttl"><h3>Q3(a) (20) · Band beam 500 × 2400, 11N28, N12 ties @ 200</h3><span>φM<sub>u</sub> = 1178 kNm · φV<sub>u</sub> = 1262 kN</span></div></summary><div class="body">
+    <div class="sk"><svg viewBox="0 0 760 230" role="img" aria-label="Band beam cross section 1 to 20">
+      <g font-size="11">
+      <rect x="40" y="40" width="680" height="141" fill="var(--soft)" stroke="var(--ink)" stroke-width="2"/>
+      <g fill="none" stroke="var(--steel)" stroke-width="2"><rect x="55" y="55" width="215" height="111" rx="6"/><rect x="272" y="55" width="215" height="111" rx="6"/><rect x="489" y="55" width="215" height="111" rx="6"/></g>
+      <g fill="var(--ink)" id="botbars"></g>
+      <g fill="var(--muted)"><circle cx="62" cy="62" r="4"/><circle cx="263" cy="62" r="4"/><circle cx="279" cy="62" r="4"/><circle cx="480" cy="62" r="4"/><circle cx="496" cy="62" r="4"/><circle cx="697" cy="62" r="4"/></g>
+      <line x1="40" y1="200" x2="720" y2="200" stroke="var(--ink)"/><path d="M40 195 v10 M720 195 v10" stroke="var(--ink)"/><text x="350" y="216">2400</text>
+      <line x1="735" y1="40" x2="735" y2="181" stroke="var(--ink)"/><path d="M730 40 h10 M730 181 h10" stroke="var(--ink)"/><text x="740" y="115">500</text>
+      <text x="40" y="18">6-N16 top (buildability, at tie corners) · 3 × N12 closed ties = 6 legs @ 200 · cover 40 (B1, N32)</text><text x="40" y="33">11-N28 bottom, ≈ 227 c/c</text>
+      
+      <text x="40" y="228" fill="var(--muted)">SECTION 1:20 · d = 500 − 40 − 12 − 14 = 434 mm</text>
+      </g></svg></div>
+    <div class="ans">Cover: Exposure B1, f'c = 32 MPa → 40 mm to ties (AS 3600 Table 4.10.3.2)
+d = 500 − 40 − 12 − 28/2 = 434 mm          Ast = 11 × 620 = 6820 mm²
+Bar spacing: inside ties 2400 − 2(40 + 12) = 2296;  (2296 − 28)/10 = 227 mm c/c  (clear 199 ≥ 28, ≤ 300 ✓)
+
+FLEXURE
+α2 = 0.85 − 0.0015(32) = 0.802      γ = 0.97 − 0.0025(32) = 0.890
+ku = Ast·fsy/(α2·f'c·γ·b·d) = 6820×500 / (0.802×32×0.890×2400×434) = 0.143  ≤ 0.36 ✓ ductile
+Mu = Ast·fsy·d·(1 − γku/2) = 6820×500×434×(1 − 0.890×0.143/2) = 1385 kNm
+φ = 1.24 − 13(0.143)/12 = 1.085 → limit 0.85
+<b>φMu = 0.85 × 1385 = 1178 kNm</b>
+Ast,min = 0.20(500/434)²(0.6√32/500)(2400)(434) = 1877 mm² ≤ 6820 ✓
+
+SHEAR (simplified method, cl 8.2.4.3)
+Ties: transverse leg spacing ≤ min(D, 600) = 500 → 3 closed N12 ties = 6 legs; Asv = 6 × 110 = 660 mm²
+dv = max(0.72D, 0.9d) = max(360, 391) = 391 mm
+Asv,min = 0.08√32 × 2400 × 200/500 = 434 mm² ≤ 660 ✓  → kv = 0.15, θv = 36°
+Vuc = 0.15 × 2400 × 391 × √32 = 795 kN
+Vus = 660 × 500 × 391 × cot36°/200 = 887 kN
+Vu,max = 0.55 × 32 × 2400 × 391 × cot36/(1 + cot²36) = 7846 kN ≫ OK (no web crushing)
+s = 200 ≤ min(0.5D, 300) = 250 ✓
+<b>φVu = 0.75 × (795 + 887) = 1262 kN</b></div>
+  </div></details>
+
+  <details class="mod"><summary><div class="ttl"><h3>Q3(b) (10) · Frame with a pin at the top-left knee</h3><span>The two-force L-bent trick</span></div></summary><div class="body">
+    <div class="note"><b>Read Figure 1 carefully:</b> left column fixed at the base and loaded by a horizontal UDL; a <b>pin at the top-left knee</b>; rigid top-right knee; right column <b>pinned</b> at its base. The beam plus right column is an L-shaped member pinned at both ends with no load on it, so it's a <b>two-force member</b>: the force it carries acts along the diagonal from the top-left pin to the bottom-right pin. That gives you every diagram.</div>
+    <div class="sk" id="q3bSvg"></div>
+    <div class="ans">Reactions:  A (fixed, left base): H_A (←), V_A (↓), M_A.   D (pin, right base): force along DB = H_D (←) + V_D (↑),  V_D/H_D = h/L
+             Σ horizontal: H_A + H_D = w·h ;  Σ vertical: V_A = V_D ;  1 degree indeterminate (the L-bent acts as an elastic prop)
+Left column AB: propped cantilever with a flexible prop. M = 0 at the pin B, max hogging at the fixed base (tension on the loaded
+             outer face, > wh²/8 because the prop is flexible), sagging region in between; shear = 0 at max sag.
+Beam BC:     M = 0 at B, linear to M_C = H_D·h at C (tension on top/outside). Constant shear V_D. Axial compression H_D.
+Column CD:   M_C at top (tension outside) linear to 0 at D. Constant shear H_D. Axial compression V_D.
+Column AB:   axial TENSION V_A (the L-bent pushes its top up-left).
+Deflected:   AB bows right, B moves right Δ; BC translates right; the L rotates about D; the 90° at C is preserved; free rotation at pin B.</div>
+  </div></details>
+
+  <details class="mod"><summary><div class="ttl"><h3>Q4 (30) · Steel floor: beams A, B, C</h3><span>V*<sub>A</sub> = 215 kN · M*<sub>C</sub> = 2023 kNm → 1000WB215 (or 900WB218)</span></div></summary><div class="body">
+    <div class="sk"><svg viewBox="0 0 760 305" role="img" aria-label="Floor plan and beam C loading">
+      <g font-size="11">
+      <rect x="30" y="30" width="360" height="180" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
+      <g stroke="var(--ink)" stroke-width="2"><line x1="120" y1="30" x2="120" y2="210"/><line x1="210" y1="30" x2="210" y2="210"/><line x1="300" y1="30" x2="300" y2="210"/></g>
+      <g fill="var(--ink)"><rect x="25" y="25" width="10" height="10"/><rect x="385" y="25" width="10" height="10"/><rect x="25" y="205" width="10" height="10"/><rect x="385" y="205" width="10" height="10"/><rect x="25" y="115" width="10" height="10"/><rect x="385" y="115" width="10" height="10"/><rect x="115" y="115" width="10" height="10"/><rect x="295" y="115" width="10" height="10"/></g>
+      <text x="200" y="22">C (18 m, columns at ends only)</text><text x="200" y="226">C</text>
+      <text x="126" y="80">A</text><text x="126" y="170">A</text><text x="306" y="80">A</text><text x="306" y="170">A</text><text x="216" y="125">B (9 m)</text>
+      <path d="M50 70 h50 M50 70 l8 -4 v8z" stroke="var(--accent)" fill="var(--accent)"/><text x="40" y="62" fill="var(--accent)">slab spans E–W</text>
+      <text x="30" y="246">4 × 4500 = 18 m; 2 × 4500 = 9 m</text><text x="30" y="260">A: 4.5 m (C → column); B: 9 m (C → C)</text>
+      <text x="30" y="274">Tributary width of A and B = 4.5 m</text><text x="30" y="288">C carries no slab (slab spans parallel to C)</text>
+      <text x="420" y="40" font-weight="600">Beam C, factored loads</text>
+      <line x1="420" y1="110" x2="740" y2="110" stroke="var(--steel)" stroke-width="3"/>
+      <path d="M420 110 l-7 12 h14z M740 110 l-7 12 h14z" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+      <g stroke="var(--crit)" stroke-width="2" fill="var(--crit)"><path d="M500 60 v46 M580 50 v56 M660 60 v46"/><path d="M500 106 l-4 -8 h8z M580 106 l-4 -8 h8z M660 106 l-4 -8 h8z"/></g>
+      <text x="472" y="56" fill="var(--crit)">112.0</text><text x="586" y="62" fill="var(--crit)">327.0 kN</text><text x="648" y="56" fill="var(--crit)">112.0</text>
+      <text x="430" y="140">+ self weight 1.2 × 0.98 = 1.18 kN/m;  R = 286.1 kN each end</text>
+      <polyline points="420,160 500,224 580,262 660,224 740,160" fill="var(--tint)" stroke="var(--accent)" stroke-width="2"/>
+      <text x="472" y="244">1276</text><text x="560" y="282">2023 kNm</text><text x="660" y="244">1276</text>
+      <g stroke="var(--muted)" stroke-dasharray="3 3"><line x1="500" y1="100" x2="500" y2="290"/><line x1="580" y1="100" x2="580" y2="290"/><line x1="660" y1="100" x2="660" y2="290"/></g>
+      <text x="420" y="298" fill="var(--muted)">restraints at A, B: four 4.5 m segments</text>
+      </g></svg></div>
+    <div class="ans">LOADS   G slab = 0.150 × 25 = 3.75 kPa;  + SDL 1.5 → g = 5.25 kPa;   beam SW = 100 × 9.81/1000 = 0.98 kN/m
+        Q = 3 kPa + 2 × P,  P = 3.5 t × 9.81 = 34.3 kN (assumed concurrent with the UDL, as "plus" in the question)
+(a) BEAM A (span 4.5 m, tributary 4.5 m)
+    wG = 5.25 × 4.5 + 0.98 = 24.6 kN/m     wQ = 3 × 4.5 = 13.5 kN/m
+    w* = 1.2(24.6) + 1.5(13.5) = 49.8 kN/m      (1.35G = 33.2, doesn't govern)
+    Both point loads placed at (next to) the support:
+    <b>V*max = 49.8 × 4.5/2 + 1.5 × 2 × 34.3 = 112.0 + 103.0 = 215 kN</b>
+    (if the two loads must be ≥ 1 m apart: 112.0 + 51.5(1 + 3.5/4.5) = 204 kN; state your assumption)
+
+(b) BEAM C (simply supported, 18 m, loads from A at 4.5 & 13.5 m, from B at 9 m)
+    Reaction of A on C:  RG = 24.6×4.5/2 = 55.4,  RQ = 13.5×4.5/2 = 30.4 → P*A = 1.2(55.4) + 1.5(30.4) = 112.0 kN
+    Reaction of B on C:  RG = 24.6×9/2 = 110.7,  RQ = 13.5×9/2 = 60.8;  both point loads on B at its end (on C midspan):
+                         P*B = 1.2(110.7) + 1.5(60.8) + 1.5(2 × 34.3) = 327.0 kN
+    R = (2 × 112.0 + 327.0)/2 + 1.18 × 18/2 = 286.1 kN
+    <b>M*max (midspan) = 112.0 × 4.5 + 327.0 × 18/4 + 1.18 × 18²/8 = 504 + 1471 + 48 = 2023 kNm</b>
+    M* at 4.5 m = 1276 kNm.   V* = 286 kN.
+    Critical segment 4.5–9 m (le = 4.5 m, FF, loads at restraints → kt = kl = kr = 1.0)
+      M at ¼, ½, ¾ points = 1465, 1652, 1838 kNm → αm = 1.7(2023)/√(1465² + 1652² + 1838²) = 1.20
+    Trial 1000WB215 (Grade 300, fy = 300 [tf = 20], Zex = 9570×10³, Iy = 90.3×10⁶, J = 2890×10³, Iw = 21700×10⁹)
+      Ms = 300 × 9570×10³ = 2871 kNm;  φMs = 2584 kNm
+      Mo = √[(π²EIy/le²)(GJ + π²EIw/le²)] = √[(8.80×10⁶)(2.31×10¹¹ + 2.12×10¹²)] = 4545 kNm
+      αs = 0.6[√((2871/4545)² + 3) − 2871/4545] = 0.727
+      <b>φMb = 0.9 × 1.20 × 0.727 × 2871 = 2254 kNm ≥ 2023 ✓</b>   (+58 kNm for real SW of 215 kg/m: 2081 ✓)
+    Rejected: 900WB175 φMb = 1837 ✗; 800WB192 φMb = 1978 ✗.  Alternative: 900WB218 φMb = φMs = 2510 kNm ✓ (stiffer, shallower).
+    End segment 0–4.5 m: M* = 1276, αm = 1.81, so OK by inspection.   Shear φVv = 0.9×0.6×300×1000×16 = 2592 kN ≫ 286 ✓
+    <b>Adopt 1000WB215, Grade 300</b> (note: an 18 m primary beam is a lot. Comment that a column at mid-length of C would be far cheaper.)
+
+(c) CONNECTION A → C (simple = pin): web side plate (or double angle cleat) welded/bolted to C's web,
+    A's top flange coped to clear C's flange, 2–3 M20 8.8/S bolts in a single vertical line through A's web,
+    flanges NOT connected (so no moment transfer), 6 mm fillet welds plate-to-web, a stiffener in C under the connection.</div>
+  </div></details>
+</section>
+
+<!-- ============ MINE ============ -->
+<section class="view" id="v-mine" hidden>
+  <div class="card">
+    <div class="eyebrow">Your design (Group 2)</div>
+    <h2>The numbers Q1 and Q2 will ask you to remember</h2>
+    <p>Pulled from your Phase 1–3 final reports. Q1/Q2 say "in your Phase 2 submission…", so quoting your own numbers and decisions shows the marker you understand <i>what you did</i>. Print your reports' summary pages too.</p>
+    <div class="scroll"><table class="t"><thead><tr><th class="l">Item</th><th class="l">Your decision / result</th><th class="l">Why (say this)</th></tr></thead><tbody>
+      <tr><td class="l">Grid</td><td class="l">8.4 × 8.4 m (8.1 m in places): about 3 bays of 2.6 m between columns. Columns placed outside the AS 2890.1 Fig 5.2 envelope (X<sub>min</sub> 750).</td><td class="l">Exemplars: P8 car park (UQ, band beam, 8.07 m grid) and Wickham Tce (flat slab with capitals).</td></tr>
+      <tr><td class="l">Phase 1 band beam</td><td class="l">2400 × 370 band, 170–200 slab. M*<sup>−</sup> 817 kNm (F<sub>d</sub>L<sub>n</sub>²/10) → 16N24; M*<sup>+</sup> 742 → 14N24; V* 602 kN → 7-leg N10 @ 175.</td><td class="l">T36 chart; cl 6.10 coefficients valid (square grid).</td></tr>
+      <tr><td class="l">Phase 2 band beam</td><td class="l"><b>1200 × 470</b> band, 270 slab. Pinned model: hog −664 kNm → 14N20 (φM<sub>u</sub> 669); sag 419 → 8N20 (427); end span 123 → 6N16 (min steel). V* 487 kN → 4-leg N10 @ 225–235.</td><td class="l">Ties needed at interior columns; minimum ties elsewhere (they also hold the bars).</td></tr>
+      <tr><td class="l">Slab strip</td><td class="l">270 slab: hog −78.8 kNm/m → 8N12; sag 50.4 → 5N12; V* 56 ≤ φV<sub>uc</sub> 128 (no ties). Deflection: cl 9.4.4 failed (36 &gt; 34.7), so 2N10 compression bars were added to cut k<sub>cs</sub> (≤ 1.68).</td><td class="l">Good Q2 point: compression steel reduces long-term creep deflection.</td></tr>
+      <tr><td class="l">Flat slab</td><td class="l">240 slab, drop 2800 × 2800, 420 total. Column strip hog 468 kNm → 15N16 @ 190; middle strip 156 → 17N16 @ 300 (A<sub>st.min</sub>); sags 15N16 / 13N16.</td><td class="l">Drop ≈ L/3; depth ≈ 1.75 × slab.</td></tr>
+      <tr><td class="l">Punching</td><td class="l">Phase 1: V* 1151 kN ≤ φV<sub>uo</sub> 1709 at the column, 3167 outside the drop. Phase 2: V* 443 kN with M* 625 kNm at the 3rd row of columns, 420 drop OK.</td><td class="l">The drop panel exists for punching plus hogging depth.</td></tr>
+      <tr><td class="l">Edge beam</td><td class="l">400 wide under the 240 slab: hog 454 kNm → 5N24 top (φM<sub>u</sub> 464); sag 244 → 4N20; V* 147; N10 closed ties @ 150/200; 2N20 each face for torsion; 3N24 stopped 1.8 m from CL.</td><td class="l">Closed ties because the slab twists the beam (spandrel).</td></tr>
+      <tr><td class="l">Columns</td><td class="l">600 × 300: fixed N* 885, M*<sub>x</sub> 152, M*<sub>y</sub> 65 → 8N20 (1 %), N10 @ 300; pinned N* 886, M*<sub>min</sub> 27/13. 300 × 300: 4N20. All short.</td><td class="l">Min eccentricity 0.05D·N*; biaxial for the flat slab.</td></tr>
+      <tr><td class="l">Shear wall</td><td class="l">4000 × 200 × 6600 high. EQ (EDC I, 0.1W): 940 kN middle, 918 kN top, 50 % to this wall. N* 910 / 1821 kN. N12 @ 175 vertical, N12 @ 350 horizontal, laps 450, cog at top.</td><td class="l">Rule of 10; symmetric walls, so a 50/50 split.</td></tr>
+      <tr><td class="l">Movement joint</td><td class="l">Across the building at mid-length, aligned on both floors; shear walls beside it and in opposite corners (NW and SE).</td><td class="l">Two roughly equal portions; each needs its own lateral resistance.</td></tr>
+      <tr><td class="l">Pad footing</td><td class="l">1900 × 1900 × 400, N20 @ 200 EW. N<sub>s</sub> 693 kN → q 192 kPa ≤ 200. φV<sub>uo</sub> 1550 ≥ 738 kN.</td><td class="l">Unfactored load for size; punching for depth.</td></tr>
+      <tr><td class="l">Piles + cap</td><td class="l">E<sub>d</sub> = 1.2 × 886 = 1063 kN (the +20 % down-drag), 531 kN per pile. 2 × Ø600, 4 m tuff socket + 6 m fill = 10 m. Cap 2700 × 900 × 1000; strut θ 42.9°, T* 476 kN → 4N20.</td><td class="l">φ<sub>g</sub> = 0.5; spacing 3D (≥ 2.5D).</td></tr>
+      <tr><td class="l">Phase 1 cost</td><td class="l">Totals: band $950,201 vs flat slab $795,361 per floor. Different floor areas were used (2505 vs 1764 m²); per m² the band beam floor is cheaper (~$294 vs $319/m²).</td><td class="l">Be ready to say how you compared them.</td></tr>
+      <tr><td class="l">Phase 3 geometry</td><td class="l">8 frames @ 8.4 m (7 bays), span 25.2 m, overhangs 5.85 m each side, roof 36.9 × 68.15 m, 3° pitch, columns 3.3 m.</td><td class="l">Steel columns sit on the 600 × 300 concrete columns.</td></tr>
+      <tr><td class="l">Wind</td><td class="l">V<sub>des</sub> 44.9 m/s, p = 1.21C<sub>shp</sub>; K<sub>a</sub> 0.8 frame, 1.0 purlin; T1–T4 cases; transverse H 22.8 kN, longitudinal 58.2 kN per frame (29.1 kN per column top).</td><td class="l">EQ 7.75 kN doesn't govern.</td></tr>
+      <tr><td class="l">Purlins</td><td class="l">Z150-19 @ 1.5 m, lapped continuous, 2 rows of bridging per bay; outward 0.39 kN/m (30 %), inward 1.18 kN/m (77 %); cleat 6 mm, 2-M12 4.6/S.</td><td class="l">Z sections lap; bridging ≤ 20D or 4 m.</td></tr>
+      <tr><td class="l">Portal</td><td class="l">Approx. (0.6L hinged sub-span): eaves 300 kNm, mid 162 kNm. SpaceGASS: knee 340 kNm, ridge 194 kNm. Rafter 460UB74.6 (knee 0.85 combined), haunch 2.6 m; column 250UC89.5 (biaxial base 0.98); cantilever 250UB37.3.</td><td class="l">Approx. moments within 2–6 % of SpaceGASS, but base thrust over-estimated by ~30 %.</td></tr>
+      <tr><td class="l">Fly braces</td><td class="l">Every 3rd purlin (4.5 m), including the knee end; 50 × 50 × 6 EA, M20 4.6/S; restraint force 2.5 % × 768 = 19 kN.</td><td class="l">Restrains the bottom flange near the knee and under uplift.</td></tr>
+      <tr><td class="l">Connections</td><td class="l">Knee: 4-M30 8.8/TF per flange, 25 mm end plate, column stiffeners + 10 mm doubler plate (panel shear failed unstiffened). Ridge 4-M24. Base 500 × 500 (50 thick, or 25 + gussets), 4-M30.</td><td class="l">Rigid joints connect the flanges.</td></tr>
+      <tr><td class="l">2nd order</td><td class="l">+1.9–3.7 % (δ ≈ 1.02–1.04); slightly reduced under uplift.</td><td class="l">Not sway-sensitive.</td></tr>
+      <tr><td class="l">Deflection</td><td class="l">Sway 3.8 mm ≤ 22; rafter 81 ≤ 101 mm; <b>cantilever tip 44 &gt; 32.5 mm FAIL</b>.</td><td class="l">Fix: knee brace or deeper cantilever.</td></tr>
+      <tr><td class="l">Roof cost</td><td class="l">$293,976 (primary steel 33.4 t at $4500/t + market-rate items).</td><td class="l">Course method: $4500/t × 1.1 + purlins $/m × 1.5 + GST.</td></tr>
+    </tbody></table></div>
+    <div class="note crit"><b>Things in your reports to be ready to defend (or quietly correct in the exam).</b>
+    <ul>
+    <li>Phase 1 used Q = 5 kPa, SDL 1.5 kPa and 24.5 kN/m³. The exam says to use the AS 1170.1 carpark Q (2.5 kPa) and the RC self weight used all semester. The course and the brief use <b>25 kN/m³</b>.</li>
+    <li>Flat slab column/middle strip split: you used 60/40 at the support. The course method was <b>75/25</b> hogging and 50/50 sagging.</li>
+    <li>Shear without ties: your slab check capped k<sub>v</sub> at 0.15. In the simplified method in this guide, k<sub>v</sub> = 0.15 needs A<sub>sv</sub> ≥ A<sub>sv.min</sub>. Without ties use k<sub>v</sub> = 200/(1000 + 1.3d<sub>v</sub>) (≤ 0.10). Check this against your printed AS 3600 before the exam.</li>
+    <li>Pile cap tie: you used 0.9f<sub>sy</sub>. For strut and tie, AS 3600 uses φ = 0.8 for ties (0.6 for struts).</li>
+    <li>The band beam changed from 2400 × 370 (Phase 1) to 1200 × 470 (Phase 2). Know why (narrower and deeper: more lever arm, fewer ties).</li>
+    </ul></div>
+    <div class="note"><b>Your own "unresolved issues" are gold for Q1.</b> The cantilever deflection failure, the tight 0.98 biaxial column check, the column panel shear needing a doubler, the basis of the cost comparison and the slab deflection needing compression steel are exactly the "what would you change" thinking the examiner wants.</div>
+  </div>
+</section>
+
+</div></main>
+<footer>CIVL3390 Exam Sprint · built from the course materials in your archive. Not affiliated with UQ. Check every clause against your printed standards.</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const fx=(x,d=1)=>Number(x).toFixed(d);
+
+/* ---------- routing ---------- */
+const views=["plan","learn","calc","sketch","papers","mine"];
+function show(v){if(!views.includes(v))v="plan";views.forEach(x=>{$("#v-"+x).hidden=x!==v});
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v===v?"true":"false"));}
+document.querySelectorAll("nav.tabs button").forEach(b=>b.addEventListener("click",()=>{try{history.replaceState(null,"","#"+b.dataset.v)}catch(e){}show(b.dataset.v);window.scrollTo({top:0})}));
+window.addEventListener("hashchange",()=>show(location.hash.slice(1)));
+show(location.hash.slice(1)||"plan");
+
+/* ---------- plan ---------- */
+const PLAN=[
+ {d:"Tonight (Fri 00:15)",s:"45 min, then SLEEP",t:[
+  ["00:15","Read the Plan tab and skim the 2023 paper","Just read the four questions so your brain knows the target. Don't try to answer them yet."],
+  ["00:40","Print list","Queue up: the cheat sheet PDF, the mock exam PDF, the steel section tables, the T38 Ast and column charts, and your Phase 1–3 report summaries. Then sleep: 7+ hours."]]},
+ {d:"Day 1 · Friday",s:"learn the machinery (~10 h)",t:[
+  ["08:30","Lesson 1 + 2: the project, loads and combinations","Know the building and the 1.2G + 1.5Q routine cold. 25 kN/m³, 1 t = 9.81 kN."],
+  ["09:30","Lesson 11: RC flexure + shear","Read the routine, then do 2023 Q3(a) from a blank page. Check against the 2023 tab and the calculator. Target 25 min."],
+  ["11:00","Calculator drill: 2 more RC sections","Change b, D, bars and tie spacing in the Q3 calculator. Do each by hand first. Include one where A<sub>sv</sub> &lt; A<sub>sv.min</sub>."],
+  ["12:00","Lunch + walk","Away from screens."],
+  ["13:00","Lesson 12: steel beam LTB","Read it, then do 2023 Q4 (a) and (b) on paper. Check with the steel calculator."],
+  ["14:45","Steel drill: 2 variations","E.g. change the span to 16 m, or put restraint only at B. Find α<sub>m</sub>, try 3 sections."],
+  ["15:45","Sketch drills tab + 2023 Q3(b)","Do all four drills before revealing. Then the pinned-knee frame. The rules list goes on the cheat sheet."],
+  ["17:00","Lessons 3 + 4: floor systems, pattern loading, fixed vs pinned","Explain each out loud with a sketch in 60 s."],
+  ["18:30","Dinner",""],
+  ["19:30","Lessons 5 + 6: shear walls and movement joints","These are the highest-value Q1 topics. Then answer 2023 Q1 in 20 min, dot points plus 2 sketches."],
+  ["21:00","Lessons 7 + 8: columns and footings; 2023 Q2","Write Q2 answers in 20 min, compare, fix gaps. Concept quiz at the end of Learn. Sleep by 23:00."]]},
+ {d:"Day 2 · Saturday",s:"test, patch, prepare (~9 h)",t:[
+  ["08:30","Lessons 9 + 10: Phase 3 steel roof","Fixed vs pinned bases, approximate analysis, 2nd order, purlins, fly braces, connections."],
+  ["10:00","MOCK EXAM, timed: 130 min, open book","Use only what you'll bring on the day (cheat sheet, tables, T38, your reports). No calculators on this page!"],
+  ["12:15","Lunch",""],
+  ["13:00","Mark the mock with the solutions","Be strict. Write every mistake on the cheat sheet in pen where you'd look for it in the exam."],
+  ["14:30","Re-do whichever of Q3/Q4 you dropped marks on","New numbers from the calculators. Repeat until under 25 min each."],
+  ["15:30","Your design tab + skim your own reports","Highlight: grid, member sizes, MJ location, shear wall, footings, purlins, 2nd-order %, cantilever deflection fail. Tab those pages."],
+  ["17:00","Rapid recall: one sketch per topic","Corbel MJ, wall layout, pad footing sections, pile cap strut-tie, rigid vs pin connection, portal BMD. 3 min each."],
+  ["18:30","Pack the bag","Calculator (FX82 + spare battery), pens, pencil, ruler, eraser, printed pack in order: cheat sheet → steel tables → T38 charts → reports."],
+  ["20:00","Light review only, then sleep","Read the cheat sheet once. Don't start anything new."]]},
+ {d:"Exam day",s:"warm-up",t:[
+  ["−90 min","Warm-up: one RC section and one α<sub>s</sub> calc","Just to get the calculator fingers moving."],
+  ["−30 min","Read the 'In the exam room' card","Q3 and Q4 first; 1.2 min per mark; state assumptions."]]}
+];
+function renderPlan(){const done=store.get("civl3390plan",{});let n=0,k=0;
+  $("#plan").innerHTML=PLAN.map((day,di)=>`<div class="day"><h3>${day.d}<small>${day.s}</small></h3>${day.t.map((t,ti)=>{const id=di+"-"+ti;n++;if(done[id])k++;
+    return `<label class="task ${done[id]?"done":""}"><input type="checkbox" data-id="${id}" ${done[id]?"checked":""}><div><span class="t">${t[0]}</span><b>${t[1]}</b>${t[2]?`<span class="d">${t[2]}</span>`:""}</div></label>`}).join("")}</div>`).join("");
+  const p=Math.round(100*k/n);$("#pct").textContent=p+"%";$("#pbar").style.width=p+"%";
+  document.querySelectorAll("#plan input").forEach(c=>c.addEventListener("change",()=>{const d=store.get("civl3390plan",{});d[c.dataset.id]=c.checked;store.set("civl3390plan",d);renderPlan()}));}
+renderPlan();$("#resetPlan").addEventListener("click",()=>{store.set("civl3390plan",{});renderPlan()});
+
+/* ---------- quiz ---------- */
+const QUIZ=[
+ ["Why did you design the band beam reinforcement from the pinned-column analysis?",["It gives smaller moments, so less steel","It gives the larger beam moments, and ductile RC can redistribute any unintended column moment in a braced frame","AS 3600 forbids fixed columns","SpaceGASS can't model fixed columns"],1,"The pinned model gave the larger sag and most hog values, so it's safe for the floor. In a braced frame the column moments from fixity are small and released by cracking and yielding (ductility)."],
+ ["Which load arrangement gives the maximum positive (sagging) moment in span 2 of a 3-span beam?",["Q on all spans","Q on spans 1 and 2","Q on span 2 only (alternate spans: 2, not 1 or 3)","Q on spans 1 and 3"],2,"Load the span itself and the alternate spans; unloaded neighbours rotate the supports to increase sag."],
+ ["A shear wall is 200 × 5400. A column is 300 × 600 (strong axis). Ratio of I?",["~10","~49","~486","~4.4"],2,"200·5400³/12 ÷ 300·600³/12 = 2624/5.4 ≈ 486, so the walls take all the lateral load (rule of 10)."],
+ ["Where should parallel shear walls go in a floor portion between movement joints?",["At opposite ends, for maximum torsional lever arm","Close together near the middle (fixed point), balanced about the centre of mass","Only along the street frontage","Anywhere; shrinkage is negligible"],1,"Walls at both ends in the same direction restrain shrinkage, so the floor cracks. Centralised, balanced walls give lateral resistance and let the floor move freely from the fixed point."],
+ ["A corbel movement joint transfers:",["Moment and shear","Vertical shear only, allowing horizontal sliding on a bearing pad","Axial tension","Nothing; it's only for fire"],1,"That's its whole purpose: support without restraint."],
+ ["What governs drop panel depth in a flat slab?",["Deflection only","Punching shear at the column (with moment transfer when columns are fixed)","Fire resistance","Crack control"],1,"Cl 9.3.3 (M*v = 0) and cl 9.3.4 (with M*v). Your Phase 2 check at the 3rd column row (V* 443 kN, M* 625 kNm) passed with the 420 drop."],
+ ["Your Phase 3 columns have fixed bases because:",["Fixed bases are always cheaper","There's no wall bracing (it would cost parking spaces), so the columns must cantilever for longitudinal stability","AS 4100 requires it","The purlins need it"],1,"Normally pinned bases are cheaper; here the concrete floor easily takes base moments, and there's no other longitudinal system. Your 250UC89.5 base check was 0.98: the weak-axis cantilever moment (96 kNm) drove it."],
+ ["Second-order analysis in SpaceGASS should use:",["Non-linear material","Non-linear geometry","Linear static only","Dynamic analysis"],1,"Geometry (P-Δ, P-δ). Material is for non-linear stress-strain (e.g. stainless, Ramberg–Osgood). Steel stays elastic."],
+ ["Under wind uplift, which purlin flange buckles and what fixes it?",["Top flange; more screws","Bottom (inner) flange; bridging","Web; stiffeners","None; uplift is tension"],1,"The sheeting restrains only the top flange. Under uplift the inner flange is in compression. Bridging shortens its unbraced length."],
+ ["For a 2-pile cap, the bottom bars are designed as:",["Flexural reinforcement from M = PL/4","The tension tie of a strut-and-tie model, anchored past the nodes over the piles","Shear reinforcement","Crack control only"],1,"Pile caps are deep beams (D-regions). Struts run from the column to the piles at ~45°; the tie between the piles must be fully anchored (cogs)."]
+];
+let qs=0,qa=0;
+function renderQuiz(){qs=0;qa=0;$("#qScore").textContent="0 / 0";
+ $("#quiz").innerHTML=QUIZ.map((q,i)=>`<div class="q" data-i="${i}"><div class="qh"><span class="qn">Q${i+1}</span><b>${q[0]}</b></div><div class="opts">${q[1].map((o,j)=>`<button class="opt" data-j="${j}" type="button"><span class="k">${"ABCD"[j]}</span><span>${o}</span></button>`).join("")}</div><div class="why" hidden>${q[3]}</div></div>`).join("");
+ document.querySelectorAll("#quiz .q").forEach(el=>{const i=+el.dataset.i;el.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{
+   const j=+b.dataset.j;el.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(+x.dataset.j===QUIZ[i][2])x.classList.add("right")});
+   if(j!==QUIZ[i][2])b.classList.add("wrong");else qs++;qa++;el.querySelector(".why").hidden=false;$("#qScore").textContent=qs+" / "+qa;}))});}
+renderQuiz();$("#qReset").addEventListener("click",renderQuiz);
+
+/* ---------- RC calculator ---------- */
+const AB={10:78,12:110,16:200,20:310,24:450,28:620,32:800,36:1020};
+function rcCalc(){
+ const b=+$("#rc_b").value,D=+$("#rc_D").value,c=+$("#rc_c").value,fc=+$("#rc_fc").value,db=+$("#rc_db").value,n=+$("#rc_n").value,dt=+$("#rc_dt").value,legs=+$("#rc_legs").value,s=+$("#rc_s").value,Ms=parseFloat($("#rc_M").value),Vs=parseFloat($("#rc_V").value);
+ const fsy=500,d=D-c-dt-db/2,Ast=n*AB[db],a2=Math.max(0.67,0.85-0.0015*fc),g=Math.max(0.67,0.97-0.0025*fc);
+ const ku=Ast*fsy/(a2*fc*g*b*d),Mu=Ast*fsy*d*(1-g*ku/2)/1e6,phi=Math.min(0.85,Math.max(0.65,1.24-13*ku/12));
+ const Amin=0.2*Math.pow(D/d,2)*0.6*Math.sqrt(fc)/fsy*b*d;
+ const dv=Math.max(0.72*D,0.9*d),Asv=legs*AB[dt],Asvmin=0.08*Math.sqrt(fc)*b*s/fsy;
+ const kv=Asv>=Asvmin?0.15:Math.min(0.10,200/(1000+1.3*dv)),th=Asv>=Asvmin?36:36;
+ const cot=1/Math.tan(th*Math.PI/180),Vuc=kv*b*dv*Math.min(Math.sqrt(fc),8)/1e3,Vus=Asv*fsy*dv*cot/s/1e3,Vmax=0.55*fc*b*dv*cot/(1+cot*cot)/1e3;
+ const Vu=Math.min(Vuc+Vus,Vmax),inner=b-2*(c+dt),sp=n>1?(inner-db)/(n-1):0,legsp=legs>1?(inner-dt)/(legs-1):0;
+ const smax=Math.min(0.5*D,300);
+ let o=`d = ${D} − ${c} − ${dt} − ${db}/2 = ${fx(d)} mm        Ast = ${n} × ${AB[db]} = ${Ast} mm²
+bar spacing ≈ ${fx(sp,0)} mm c/c (clear ${fx(sp-db,0)})${sp-db<Math.max(db,25)?"  ✗ too tight: use 2 layers / fewer bars":""}${sp>300?"  ⚠ > 300 crack control":""}
+α2 = ${fx(a2,3)}   γ = ${fx(g,3)}
+ku = ${Ast}×500 / (${fx(a2,3)}×${fc}×${fx(g,3)}×${b}×${fx(d)}) = <b>${fx(ku,3)}</b> ${ku<=0.36?"≤ 0.36 ✓ ductile":"> 0.36 ✗ over-reinforced: increase D or f'c, or add compression steel"}
+Mu = Ast·fsy·d(1 − γku/2) = ${fx(Mu)} kNm      φ = 1.24 − 13ku/12 = ${fx(1.24-13*ku/12,3)} → ${fx(phi,3)}
+<b>φMu = ${fx(phi*Mu)} kNm</b>${isNaN(Ms)?"":(phi*Mu>=Ms?"  ≥ M* ✓":"  < M* ✗")}
+Ast,min = 0.20(D/d)²(0.6√f'c/fsy)bd = ${fx(Amin,0)} mm² ${Ast>=Amin?"✓":"✗"}
+
+dv = max(0.72D, 0.9d) = max(${fx(0.72*D)}, ${fx(0.9*d)}) = ${fx(dv)} mm
+Asv = ${legs} × ${AB[dt]} = ${Asv} mm²   (legs ≈ ${fx(legsp,0)} mm apart across the width; limit min(D, 600) = ${Math.min(D,600)} ${legsp<=Math.min(D,600)?"✓":"✗ add legs"})
+Asv,min = 0.08√f'c·b·s/fsy.f = ${fx(Asvmin,0)} mm² → ${Asv>=Asvmin?"Asv ≥ Asv,min: kv = 0.15, θv = 36°":"Asv < Asv,min: kv = 200/(1000+1.3dv) = "+fx(kv,3)+" (≤ 0.10)"}
+Vuc = ${fx(kv,3)} × ${b} × ${fx(dv)} × √${fc} = ${fx(Vuc)} kN
+Vus = Asv·fsy·dv·cotθv/s = ${fx(Vus)} kN       Vu,max = ${fx(Vmax,0)} kN
+s = ${s} ${s<=smax?"≤":">"} min(0.5D, 300) = ${smax} ${s<=smax?"✓":"✗ (allowed only if V* ≤ φVu,min)"}
+<b>φVu = 0.75 × ${fx(Vu)} = ${fx(0.75*Vu)} kN</b>${isNaN(Vs)?"":(0.75*Vu>=Vs?"  ≥ V* ✓":"  < V* ✗")}    (φVuc = ${fx(0.75*Vuc)} kN)`;
+ $("#rcOut").innerHTML=o;
+ // sketch
+ const W=700,sc=Math.min(640/b,170/D),x0=30,y0=20,bw=b*sc,dh=D*sc;
+ let svg=`<rect x="${x0}" y="${y0}" width="${bw}" height="${dh}" fill="var(--soft)" stroke="var(--ink)" stroke-width="2"/>`;
+ const ci=(c+dt/2)*sc;svg+=`<rect x="${x0+ci}" y="${y0+ci}" width="${bw-2*ci}" height="${dh-2*ci}" fill="none" stroke="var(--steel)" stroke-width="1.5" rx="4"/>`;
+ for(let i=0;i<n;i++){const xx=x0+(c+dt+db/2)*sc+(n>1?i*sp*sc:0);svg+=`<circle cx="${xx}" cy="${y0+dh-(c+dt+db/2)*sc}" r="${Math.max(2.5,db*sc/2)}" fill="var(--ink)"/>`}
+ for(let i=1;i<legs-1;i++){const xx=x0+(c+dt/2)*sc+i*legsp*sc;svg+=`<line x1="${xx}" y1="${y0+ci}" x2="${xx}" y2="${y0+dh-ci}" stroke="var(--steel)" stroke-width="1.5"/>`}
+ svg+=`<text x="${x0}" y="${y0+dh+18}" font-size="11">${b} × ${D}, ${n}-N${db} bottom, ${legs}-leg N${dt} @ ${s}, cover ${c} (ties shown as one outline + internal legs)</text>`;
+ $("#rcSketch").innerHTML=`<svg viewBox="0 0 ${W} ${dh+50}">${svg}</svg>`;
+}
+document.querySelectorAll("#rcForm input,#rcForm select").forEach(e=>e.addEventListener("input",rcCalc));rcCalc();
+
+/* ---------- steel ---------- */
+// name, fam, kg/m, d, tw, d1, Zex(1e3), fyf, fyw, Iy(1e6), J(1e3), Iw(1e9)
+const SEC=`610UB125,UB,125,612,11.9,572,3680,280,300,39.3,1560,3450
+610UB113,UB,113,607,11.2,572,3290,280,300,34.3,1140,2980
+610UB101,UB,101,602,10.6,572,2900,300,320,29.3,790,2530
+530UB92.4,UB,92.4,533,10.2,502,2370,300,320,23.8,775,1590
+530UB82.0,UB,82.0,528,9.6,502,2070,300,320,20.1,526,1330
+460UB82.1,UB,82.1,460,9.9,428,1840,300,320,18.6,701,919
+460UB74.6,UB,74.6,457,9.1,428,1660,300,320,16.6,530,815
+460UB67.1,UB,67.1,454,8.5,428,1480,300,320,14.5,378,708
+410UB59.7,UB,59.7,406,7.8,381,1200,300,320,12.1,337,467
+410UB53.7,UB,53.7,403,7.6,381,1060,320,320,10.3,234,394
+360UB56.7,UB,56.7,359,8.0,333,1010,300,320,11.0,338,330
+360UB50.7,UB,50.7,356,7.3,333,897,300,320,9.60,241,284
+360UB44.7,UB,44.7,352,6.9,333,770,320,320,8.10,161,237
+310UB46.2,UB,46.2,307,6.7,284,729,300,320,9.01,233,197
+310UB40.4,UB,40.4,304,6.1,284,633,320,320,7.65,157,165
+310UB32.0,UB,32.0,298,5.5,282,467,320,320,4.42,86.5,92.9
+250UB37.3,UB,37.3,256,6.4,234,486,320,320,5.66,158,85.2
+250UB31.4,UB,31.4,252,6.1,234,395,320,320,4.47,89.3,65.9
+250UB25.7,UB,25.7,248,5.0,232,319,320,320,2.55,67.4,36.7
+200UB29.8,UB,29.8,207,6.3,188,316,320,320,3.86,105,37.6
+200UB25.4,UB,25.4,203,5.8,188,259,320,320,3.06,62.7,29.2
+200UB22.3,UB,22.3,202,5.0,188,227,320,320,2.75,45.0,26.0
+200UB18.2,UB,18.2,198,4.5,184,180,320,320,1.14,38.6,10.4
+180UB22.2,UB,22.2,179,6.0,159,195,320,320,1.22,81.6,8.71
+180UB18.1,UB,18.1,175,5.0,159,157,320,320,0.975,44.8,6.80
+150UB18.0,UB,18.0,155,6.0,136,135,320,320,0.672,60.5,3.56
+310UC158,UC,158,327,15.7,277,2680,280,300,125,3810,2860
+310UC137,UC,137,321,13.8,277,2300,280,300,107,2520,2390
+310UC118,UC,118,315,11.9,277,1960,280,300,90.2,1630,1980
+310UC96.8,UC,96.8,308,9.9,277,1560,300,320,72.9,928,1560
+250UC89.5,UC,89.5,260,10.5,225,1230,280,320,48.4,1040,713
+250UC72.9,UC,72.9,254,8.6,225,986,300,320,38.8,586,557
+200UC59.5,UC,59.5,210,9.3,181,656,300,320,20.4,477,195
+200UC52.2,UC,52.2,206,8.0,181,570,300,320,17.7,325,166
+200UC46.2,UC,46.2,203,7.3,181,494,300,320,15.3,228,142
+150UC37.2,UC,37.2,162,8.1,139,310,300,320,7.01,197,39.6
+150UC30.0,UC,30.0,158,6.6,139,250,320,320,5.62,109,30.8
+1200WB455,WB,455,1200,16,1120,28200,280,300,834,22000,280000
+1200WB423,WB,423,1192,16,1120,25800,280,300,750,16500,251000
+1200WB392,WB,392,1184,16,1120,23400,280,300,667,12100,221000
+1200WB342,WB,342,1184,16,1120,19800,280,300,342,9960,113000
+1200WB317,WB,317,1176,16,1120,17900,280,300,299,7230,98500
+1200WB278,WB,278,1170,16,1120,15000,280,300,179,5090,58700
+1200WB249,WB,249,1170,16,1120,12900,280,300,87.0,4310,28500
+1000WB322,WB,322,1024,16,960,16400,280,300,342,9740,84100
+1000WB296,WB,296,1016,16,960,14800,280,300,299,7010,73000
+1000WB258,WB,258,1010,16,960,12300,280,300,179,4870,43400
+1000WB215,WB,215,1000,16,960,9570,300,300,90.3,2890,21700
+900WB282,WB,282,924,12,860,13600,280,310,341,8870,67900
+900WB257,WB,257,916,12,860,12200,280,310,299,6150,58900
+900WB218,WB,218,910,12,860,9960,280,310,179,4020,35000
+900WB175,WB,175,900,12,860,7500,300,310,90.1,2060,17400
+800WB192,WB,192,816,10,760,8060,280,310,126,4420,19600
+800WB168,WB,168,810,10,760,6840,280,310,86.7,2990,13400
+800WB146,WB,146,800,10,760,5710,300,310,69.4,1670,10600
+800WB122,WB,122,792,10,760,4530,300,310,41.7,921,6280
+700WB173,WB,173,716,10,660,6390,280,310,97.1,4020,11500
+700WB150,WB,150,710,10,660,5370,280,310,65.2,2690,7640
+700WB130,WB,130,700,10,660,4490,300,310,52.1,1510,6030
+700WB115,WB,115,692,10,660,3790,300,310,41.7,888,4770
+500WC440,WC,440,480,40,400,10400,280,280,835,30100,40400
+500WC340,WC,340,514,25,450,8980,280,280,667,13100,38800
+500WC290,WC,290,506,20,450,7570,280,300,584,8420,33300
+500WC228,WC,228,490,20,450,5210,300,300,417,3880,23000
+400WC361,WC,361,430,40,350,7470,280,280,429,24800,16300
+400WC303,WC,303,422,28,350,6420,280,280,385,14800,14300
+400WC270,WC,270,414,25,350,5660,280,280,342,10400,12500
+400WC212,WC,212,400,20,350,4360,280,300,267,5060,9380
+400WC181,WC,181,390,20,350,3410,300,300,214,3080,7310
+400WC144,WC,144,382,16,350,2590,300,300,171,1580,5720
+350WC280,WC,280,355,28,275,4940,280,280,286,16500,7100
+350WC230,WC,230,339,25,275,3910,280,280,229,8960,5400
+350WC197,WC,197,331,20,275,3350,280,300,200,5750,4600`.split("\n").map(r=>{const a=r.split(",");return{n:a[0],f:a[1],m:+a[2],d:+a[3],tw:+a[4],d1:+a[5],Z:+a[6],fy:+a[7],fyw:+a[8],Iy:+a[9],J:+a[10],Iw:+a[11]}});
+const E=2e5,Gm=8e4;
+function mb(s,le,am){const Ms=s.fy*s.Z*1e3/1e6,PEy=Math.PI**2*E*s.Iy*1e6/le**2,GJ=Gm*s.J*1e3,PEw=Math.PI**2*E*s.Iw*1e9/le**2;
+ const Mo=Math.sqrt(PEy*(GJ+PEw))/1e6,r=Ms/Mo,as=0.6*(Math.sqrt(r*r+3)-r),pMb=Math.min(0.9*am*as*Ms,0.9*Ms);
+ const slender=s.d1/s.tw>82/Math.sqrt(s.fyw/250),Vv=0.9*0.6*s.fyw*s.d*s.tw/1e3;
+ return{Ms,PEy,GJ,PEw,Mo,as,pMb,Vv,slender}}
+$("#st_sec").innerHTML=SEC.map(s=>`<option ${s.n==="1000WB215"?"selected":""}>${s.n}</option>`).join("");
+function stCalc(){const M=+$("#st_M").value,l=+$("#st_l").value,k=+$("#st_k").value,am=Math.min(2.5,+$("#st_am").value),fam=$("#st_fam").value,le=k*l;
+ const s=SEC.find(x=>x.n===$("#st_sec").value),r=mb(s,le,am);
+ $("#stOut").innerHTML=`le = ${k} × ${l} = ${le} mm      αm = ${am}
+<b>${s.n}</b>: fy = ${s.fy} MPa (flange), Zex = ${s.Z}×10³ mm³, Iy = ${s.Iy}×10⁶, J = ${s.J}×10³, Iw = ${s.Iw}×10⁹
+Ms = fy·Zex = ${fx(r.Ms)} kNm          φMs = ${fx(0.9*r.Ms)} kNm
+π²EIy/le² = ${fx(r.PEy/1e3)} kN     GJ = ${fx(r.GJ/1e9,2)} kNm²     π²EIw/le² = ${fx(r.PEw/1e9,2)} kNm²
+Mo = √[π²EIy/le² · (GJ + π²EIw/le²)] = ${fx(r.Mo)} kNm      Ms/Mo = ${fx(r.Ms/r.Mo,3)}
+αs = 0.6[√((Ms/Mo)² + 3) − Ms/Mo] = ${fx(r.as,3)}
+<b>φMb = 0.9 × ${am} × ${fx(r.as,3)} × ${fx(r.Ms)} = ${fx(0.9*am*r.as*r.Ms)} → ${fx(r.pMb)} kNm</b> (≤ φMs)   ${r.pMb>=M?"≥ M* ✓":"< M* ✗"}
+φVv ≈ 0.9 × 0.6 × ${s.fyw} × ${s.d} × ${s.tw} = ${fx(r.Vv)} kN${r.slender?"  * web slender for shear: reduce (cl 5.11.5)":""}`;
+ const ok=SEC.filter(x=>fam==="all"||x.f===fam).map(x=>({x,r:mb(x,le,am)})).filter(o=>o.r.pMb>=M).sort((a,b)=>a.x.m-b.x.m).slice(0,8);
+ $("#stTable tbody").innerHTML=ok.length?ok.map(o=>`<tr><td class="l">${o.x.n}</td><td>${o.x.m}</td><td>${o.x.fy}</td><td>${fx(0.9*o.r.Ms,0)}</td><td>${fx(o.r.Mo,0)}</td><td>${fx(o.r.as,3)}</td><td><b>${fx(o.r.pMb,0)}</b></td><td>${fx(o.r.Vv,0)}${o.r.slender?"*":""}</td></tr>`).join(""):`<tr><td colspan="8">Nothing in the table works. Reduce the segment length (more restraints) or add a column.</td></tr>`;}
+["#st_M","#st_l","#st_k","#st_am","#st_fam","#st_sec"].forEach(id=>$(id).addEventListener("input",stCalc));stCalc();
+$("#amGo").addEventListener("click",()=>{const a=+$("#am2").value,b=+$("#am3").value,c=+$("#am4").value,m=Math.max(Math.abs(a),Math.abs(b),Math.abs(c),+$("#st_M").value);
+ if(!(a||b||c))return;const v=Math.min(2.5,1.7*m/Math.sqrt(a*a+b*b+c*c));$("#st_am").value=v.toFixed(2);stCalc();});
+
+/* ---------- 2023 Q3(a) bottom bars ---------- */
+(function(){const g=document.getElementById("botbars");if(!g)return;let s="";for(let i=0;i<11;i++){s+=`<circle cx="${66+i*(628/10)}" cy="157" r="6"/>`}g.innerHTML=s})();
+
+/* ---------- sketch helpers ---------- */
+const S={
+ fix(x,y,dir="down"){return dir==="down"?`<path d="M${x-14} ${y} h28" stroke="var(--ink)" stroke-width="3"/>`+[...Array(5)].map((_,i)=>`<path d="M${x-12+i*6} ${y+7} l6 -7" stroke="var(--ink)"/>`).join(""):`<path d="M${x} ${y-14} v28" stroke="var(--ink)" stroke-width="3"/>`+[...Array(5)].map((_,i)=>`<path d="M${x-7} ${y-12+i*6} l7 6" stroke="var(--ink)"/>`).join("")},
+ pin(x,y){return `<path d="M${x} ${y} l-8 13 h16z" fill="none" stroke="var(--ink)" stroke-width="1.6"/><path d="M${x-12} ${y+15} h24" stroke="var(--ink)"/>`},
+ rol(x,y){return `<path d="M${x} ${y} l-8 11 h16z" fill="none" stroke="var(--ink)" stroke-width="1.6"/><circle cx="${x-4}" cy="${y+14}" r="2.5" fill="none" stroke="var(--ink)"/><circle cx="${x+4}" cy="${y+14}" r="2.5" fill="none" stroke="var(--ink)"/><path d="M${x-12} ${y+18} h24" stroke="var(--ink)"/>`},
+ hinge(x,y){return `<circle cx="${x}" cy="${y}" r="5" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>`},
+ arr(x1,y1,x2,y2,c="var(--crit)",lab="",lx=0,ly=0){const a=Math.atan2(y2-y1,x2-x1),h=8;return `<path d="M${x1} ${y1} L${x2} ${y2}" stroke="${c}" stroke-width="2"/><path d="M${x2} ${y2} l${-h*Math.cos(a-0.4)} ${-h*Math.sin(a-0.4)} M${x2} ${y2} l${-h*Math.cos(a+0.4)} ${-h*Math.sin(a+0.4)}" stroke="${c}" stroke-width="2"/>`+(lab?`<text x="${x2+lx}" y="${y2+ly}" font-size="11" fill="${c}">${lab}</text>`:"")},
+ udlDown(x1,x2,y,n=8){let s=`<path d="M${x1} ${y-18} H${x2}" stroke="var(--accent)" stroke-width="1.5"/>`;for(let i=0;i<=n;i++){const x=x1+(x2-x1)*i/n;s+=`<path d="M${x} ${y-18} V${y-3} l-3 -5 M${x} ${y-3} l3 -5" stroke="var(--accent)" stroke-width="1.3" fill="none"/>`}return s},
+ udlRight(x,y1,y2,n=7){let s=`<path d="M${x-20} ${y1} V${y2}" stroke="var(--accent)" stroke-width="1.5"/>`;for(let i=0;i<=n;i++){const y=y1+(y2-y1)*i/n;s+=`<path d="M${x-20} ${y} H${x-3} l-5 -3 M${x-3} ${y} l-5 3" stroke="var(--accent)" stroke-width="1.3" fill="none"/>`}return s},
+ m(x,y,w,t){return `<line x1="${x}" y1="${y}" x2="${w}" y2="${t}" stroke="var(--ink)" stroke-width="3"/>`},
+ bmd(d){return `<path d="${d}" fill="var(--tint)" stroke="var(--accent)" stroke-width="1.8"/>`},
+ sfd(d){return `<path d="${d}" fill="var(--steeltint)" stroke="var(--steel)" stroke-width="1.8"/>`},
+ defl(d){return `<path d="${d}" fill="none" stroke="var(--crit)" stroke-width="2" stroke-dasharray="5 3"/>`},
+ t(x,y,s,c="var(--ink)",fs=11){return `<text x="${x}" y="${y}" font-size="${fs}" fill="${c}">${s}</text>`},
+ frame(ox,oy,w=120,h=100){return S.m(ox,oy+h,ox,oy)+S.m(ox,oy,ox+w,oy)+S.m(ox+w,oy,ox+w,oy+h)}
+};
+const panel=(i,title,inner,W=190)=>`<g transform="translate(${i*W},0)"><text x="8" y="16" font-size="12" font-weight="600">${title}</text>${inner}</g>`;
+
+/* ---------- drills ---------- */
+const DR=[
+ {q:"Propped cantilever: fixed at left, roller at right, UDL w over span L.",
+  qs:S.m(30,70,250,70)+S.fix(30,70,"left")+S.rol(250,70)+S.udlDown(30,250,70)+S.t(120,40,"w","var(--accent)"),
+  a:panel(0,"Reactions",S.m(20,70,160,70)+S.fix(20,70,"left")+S.rol(160,70)+S.arr(20,110,20,74,"var(--crit)","5wL/8",4,30)+S.arr(160,110,160,90,"var(--crit)","3wL/8",-50,10)+S.t(26,52,"M = wL²/8 ↺","var(--crit)"))+
+    panel(1,"Deflected",S.m(20,60,160,60)+S.fix(20,60,"left")+S.rol(160,60)+S.defl("M20 60 C60 62 100 95 160 60")+S.t(20,110,"slope 0 at fixed end","var(--muted)",10))+
+    panel(2,"BMD (tension side)",S.m(15,70,165,70)+S.bmd("M15 70 L15 34 Q50 70 66 70 Q116 110 165 70 Z")+S.t(18,30,"wL²/8 hog (top)","var(--accent)",10)+S.t(80,118,"9wL²/128","var(--accent)",10)+S.t(50,82,"↑ contraflex.","var(--muted)",9))+
+    panel(3,"SFD",S.m(15,70,165,70)+S.sfd("M15 70 L15 36 L165 96 L165 70 Z")+S.t(18,32,"5wL/8","var(--steel)",10)+S.t(120,110,"−3wL/8","var(--steel)",10)+S.t(90,64,"V=0 → max sag","var(--muted)",9)),
+  n:"Fixed end hogs (tension top); max sag at 3L/8 from the roller, where V = 0. Exactly Week 13 slide 1: answer C."},
+ {q:"Portal frame, both bases PINNED, rigid knees, horizontal point load H at the top-left knee. Span L, height h.",
+  qs:S.frame(40,30,180,110)+S.pin(40,140)+S.pin(220,140)+S.arr(0,30,36,30,"var(--crit)","H",-34,-6),
+  a:panel(0,"Reactions",S.frame(20,30,130,100)+S.pin(20,130)+S.pin(150,130)+S.arr(-4,30,16,30)+S.arr(20,148,0,148,"var(--crit)","H/2",-22,12)+S.arr(150,148,130,148,"var(--crit)","H/2",-12,12)+S.arr(20,150,20,172,"var(--crit)","Hh/L ↓",4,0)+S.arr(150,172,150,150,"var(--crit)","Hh/L ↑",-62,-2))+
+    panel(1,"Deflected (sway →)",S.frame(20,30,130,100)+S.defl("M20 130 C24 80 30 40 44 30 C80 22 120 40 174 30 C172 60 158 100 150 130")+S.t(30,155,"double curvature in beam","var(--muted)",10))+
+    panel(2,"BMD",S.frame(20,30,130,100)+S.bmd("M20 130 L40 30 L20 30 Z")+S.bmd("M20 30 L20 54 L150 6 L150 30 Z")+S.bmd("M150 30 L170 30 L150 130 Z")+S.t(26,70,"Hh/2","var(--accent)",10)+S.t(152,20,"Hh/2","var(--accent)",10)+S.t(60,150,"M=0 at pins; contraflexure mid-beam","var(--muted)",9))+
+    panel(3,"SFD / AFD",S.frame(20,30,130,100)+S.t(4,90,"H/2","var(--steel)",10)+S.t(155,90,"H/2","var(--steel)",10)+S.t(60,24,"V = Hh/L","var(--steel)",10)+S.t(20,150,"AFD: left col. T = Hh/L,","var(--muted)",9)+S.t(20,162,"right col. C = Hh/L, beam C = H/2","var(--muted)",9)),
+  n:"By symmetry each pinned base takes H/2 horizontally. Moments: (H/2)h at each knee, antisymmetric. Tension on the inside face of the windward column at the knee, the outside of the leeward column. The beam has contraflexure at midspan."},
+ {q:"Portal frame, both bases FIXED, rigid knees, downward UDL w on the beam (like your portal under 1.2G + 1.5Q).",
+  qs:S.frame(40,40,180,100)+S.fix(40,140)+S.fix(220,140)+S.udlDown(40,220,40),
+  a:panel(0,"Reactions",S.frame(20,40,130,90)+S.fix(20,130)+S.fix(150,130)+S.arr(20,155,20,136,"var(--crit)","wL/2",4,8)+S.arr(150,155,150,136,"var(--crit)","wL/2",-34,8)+S.arr(-2,124,16,124,"var(--crit)","H",-12,-6)+S.arr(172,124,154,124,"var(--crit)","H",8,-6)+S.t(26,112,"M","var(--crit)")+S.t(130,112,"M","var(--crit)"))+
+    panel(1,"Deflected",S.frame(20,40,130,90)+S.defl("M20 130 C26 100 12 60 16 40 Q85 90 154 40 C158 60 144 100 150 130")+S.t(22,155,"beam sags, column tops rotate,","var(--muted)",9)+S.t(22,167,"columns double curvature","var(--muted)",9))+
+    panel(2,"BMD",S.frame(20,40,130,90)+S.bmd("M20 40 L20 22 Q40 34 46 40 Q85 80 124 40 Q130 34 150 22 L150 40 Z")+S.bmd("M20 40 L4 40 L20 100 L28 130 L20 130 Z")+S.bmd("M150 40 L166 40 L150 100 L142 130 L150 130 Z")+S.t(40,18,"hog at knees (outside)","var(--accent)",9)+S.t(74,74,"sag","var(--accent)",10)+S.t(30,146,"base ≈ ½ knee, opposite face","var(--accent)",9))+
+    panel(3,"SFD / AFD",S.frame(20,40,130,90)+S.t(30,30,"beam V: +wL/2 → −wL/2","var(--steel)",9)+S.t(4,90,"H","var(--steel)",10)+S.t(155,90,"H","var(--steel)",10)+S.t(20,155,"AFD: columns C = wL/2;","var(--muted)",9)+S.t(20,167,"beam C = H (bases push in)","var(--muted)",9)),
+  n:"Bases push inward (H); the knees hog with tension outside; the bases carry roughly half the knee moment back with opposite sign (carry-over 0.5), so the columns are in double curvature. A pinned-base version has zero base moment and a larger beam sag."},
+ {q:"Beam with overhang: pin at A, roller at B, cantilever B–C. UDL on the overhang only (pattern-loading idea, like your Phase 3 rafter overhang).",
+  qs:S.m(30,70,270,70)+S.pin(30,70)+S.rol(200,70)+S.udlDown(200,270,70,4)+S.t(26,100,"A")+S.t(196,100,"B")+S.t(266,90,"C"),
+  a:panel(0,"Reactions",S.m(20,70,175,70)+S.pin(20,70)+S.rol(130,70)+S.arr(20,48,20,66,"var(--crit)","↓ R_A",-6,-22)+S.arr(130,112,130,92,"var(--crit)","↑ R_B",6,6)+S.t(10,130,"A is pulled DOWN (hold-down!)","var(--muted)",9))+
+    panel(1,"Deflected",S.m(20,70,175,70)+S.pin(20,70)+S.rol(130,70)+S.defl("M20 70 Q75 48 130 70 Q155 84 175 100")+S.t(40,40,"back span lifts UP","var(--crit)",10))+
+    panel(2,"BMD",S.m(15,70,175,70)+S.bmd("M15 70 L130 30 Q150 40 175 70 Z")+S.t(110,24,"wa²/2 hog","var(--accent)",10)+S.t(20,100,"linear in AB (no load)","var(--muted)",9))+
+    panel(3,"SFD",S.m(15,70,175,70)+S.sfd("M15 70 L15 82 L130 82 L130 40 L175 70 Z")+S.t(20,100,"−R_A const.","var(--steel)",10)+S.t(132,36,"+wa","var(--steel)",10)),
+  n:"With only the overhang loaded, the back span hogs throughout and lifts. That's why pattern loading matters (and why cantilever band beams need bottom steel too: back-propping during construction)."}
+];
+$("#sketchDrills").innerHTML=DR.map((d,i)=>`<div class="q"><div class="qh"><span class="qn">Drill ${i+1}</span><b>${d.q}</b></div><div class="sk"><svg viewBox="-10 0 300 170" style="max-width:420px;margin:0 auto">${d.qs}</svg></div>
+<details class="reveal"><summary>Reveal the answer</summary><div class="sk"><svg viewBox="-10 0 770 175">${d.a}</svg></div><div class="note">${d.n}</div></details></div>`).join("");
+
+/* ---------- 2023 Q3(b) ---------- */
+(function(){const el=$("#q3bSvg");if(!el)return;
+ const ox=40,oy=44,w=110,h=110,zc=oy+0.4*h;
+ const base=S.m(ox,oy+h,ox,oy)+S.m(ox,oy,ox+w,oy)+S.m(ox+w,oy,ox+w,oy+h);
+ const p0=panel(0,"Figure + reactions",base+S.fix(ox,oy+h)+S.pin(ox+w,oy+h)+S.hinge(ox,oy)+S.udlRight(ox,oy+6,oy+h-4,6)+`<path d="M${ox} ${oy} L${ox+w} ${oy+h}" stroke="var(--muted)" stroke-dasharray="3 3"/>`+S.arr(ox+w+20,oy+h+20,ox+w+4,oy+h+4,"var(--crit)","F along DB",-40,26)+S.arr(ox-4,oy+h+12,ox-26,oy+h+12,"var(--crit)","H_A",-18,-4)+S.arr(ox,oy+h+12,ox,oy+h+30,"var(--crit)","V_A",4,4)+S.t(ox+6,oy+h-10,"M_A","var(--crit)"));
+ const p1=panel(1,"Deflected",base+S.hinge(ox,oy)+S.fix(ox,oy+h)+S.pin(ox+w,oy+h)+S.defl(`M${ox} ${oy+h} C${ox+2} ${oy+70} ${ox+24} ${oy+30} ${ox+12} ${oy} L${ox+w+10} ${oy-2} L${ox+w} ${oy+h}`)+S.t(ox-20,oy+h+32,"B moves →; L rotates about D","var(--muted)",9));
+ const p2=panel(2,"BMD (tension side)",base+S.hinge(ox,oy)+S.bmd(`M${ox} ${oy+h} L${ox-26} ${oy+h} Q${ox-6} ${oy+80} ${ox} ${oy+70} Q${ox+18} ${oy+40} ${ox} ${oy} Z`)+S.bmd(`M${ox} ${oy} L${ox+w} ${oy-24} L${ox+w} ${oy} Z`)+S.bmd(`M${ox+w} ${oy} L${ox+w+24} ${oy} L${ox+w} ${oy+h} Z`)+S.t(ox-34,oy+h+16,"M_A (outer face)","var(--accent)",9)+S.t(ox+30,oy-28,"M_C = H_D·h","var(--accent)",9)+S.t(ox+8,oy+46,"sag","var(--accent)",9));
+ const p3=panel(3,"SFD",base+S.sfd(`M${ox} ${oy+h} L${ox+22} ${oy+h} L${ox} ${zc} Z`)+S.sfd(`M${ox} ${zc} L${ox-14} ${oy} L${ox} ${oy} Z`)+S.sfd(`M${ox} ${oy} L${ox} ${oy-12} L${ox+w} ${oy-12} L${ox+w} ${oy} Z`)+S.sfd(`M${ox+w} ${oy} L${ox+w+12} ${oy} L${ox+w+12} ${oy+h} L${ox+w} ${oy+h} Z`)+S.t(ox+24,oy+h-2,"H_A","var(--steel)",9)+S.t(ox-36,oy+14,"−H_D","var(--steel)",9)+S.t(ox+40,oy-16,"V_D","var(--steel)",9)+S.t(ox+w+14,oy+60,"H_D","var(--steel)",9)+S.t(ox+4,zc+4,"V=0","var(--muted)",8));
+ const p4=panel(4,"AFD",base+S.t(ox+4,oy+60,"T = V_A","var(--ok)",10)+S.t(ox+30,oy-8,"C = H_D","var(--crit)",10)+S.t(ox+w-50,oy+90,"C = V_D","var(--crit)",10)+S.t(ox-20,oy+h+30,"(T tension, C compression)","var(--muted)",9));
+ el.innerHTML=`<svg viewBox="-10 0 960 195">${p0+p1+p2+p3+p4}</svg>`;
+})();
+</script>
+</body></html>
